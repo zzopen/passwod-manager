@@ -1,0 +1,13 @@
+syntax = "v1"
+
+info(
+	author: "许磊"
+	date:   "2023-08-01"
+	desc:   "backend-api"
+)
+
+import "base.api"
+import "example.api"
+import "account.api"
+
+service backend-api {}

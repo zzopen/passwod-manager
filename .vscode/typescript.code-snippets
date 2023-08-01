@@ -1,0 +1,10 @@
+{
+  "import business utils": {
+    "prefix": "ibu",
+    "body": ["import { $1 } from '@/business/utils'"]
+  },
+  "import main utils": {
+    "prefix": "imu",
+    "body": ["import { $1 } from '@main/utils'"]
+  }
+}

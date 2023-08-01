@@ -1,0 +1,22 @@
+Name: backend-api
+Host: 0.0.0.0
+Port: 8888
+Mode: dev
+Timeout: 10000
+DevServer:
+  Enabled: true
+  Port: 8887
+  HealthPath: "/health"
+Log:
+  ServiceName: "backend-api"
+  Mode: file
+  Encoding: json
+  Path: "logs/backend-api/"
+  TimeFormat: "2006-01-02 15:04:05"
+Auth:
+  AccessSecret: abcdefghijklmn
+  # 30*24*60*60
+  AccessExpire: 2592000
+Global:
+  SqliteDirPath: /Users/xulei/Downloads/z-note
+  SqliteDbName: z-note
