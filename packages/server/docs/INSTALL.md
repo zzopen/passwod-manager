@@ -1,4 +1,4 @@
-# z-note-server
+# password-manager
 
 # 安装
 
@@ -16,7 +16,7 @@
 
 # 按需修改项目
 ```shell
-1. 修改go.mod module 为 github.com/zzopen/z-note/backend
+1. 修改go.mod module 为 github.com/zzopen/password-manager/backend
 
 2. 全局修改import
 

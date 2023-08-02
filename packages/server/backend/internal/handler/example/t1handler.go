@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"github.com/zzopen/z-note/backend/internal/logic/example"
-	"github.com/zzopen/z-note/backend/internal/svc"
+	"github.com/zzopen/password-manager/backend/internal/logic/example"
+	"github.com/zzopen/password-manager/backend/internal/svc"
 )
 
 func T1Handler(svcCtx *svc.ServiceContext) http.HandlerFunc {

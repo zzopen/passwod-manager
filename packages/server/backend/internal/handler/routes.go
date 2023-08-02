@@ -4,9 +4,9 @@ package handler
 import (
 	"net/http"
 
-	account "github.com/zzopen/z-note/backend/internal/handler/account"
-	example "github.com/zzopen/z-note/backend/internal/handler/example"
-	"github.com/zzopen/z-note/backend/internal/svc"
+	account "github.com/zzopen/password-manager/backend/internal/handler/account"
+	example "github.com/zzopen/password-manager/backend/internal/handler/example"
+	"github.com/zzopen/password-manager/backend/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
 )

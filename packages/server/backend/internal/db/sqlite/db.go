@@ -1,15 +1,14 @@
 package sqlite
 
 import (
-	"log"
-	"net/url"
-	"os"
-	"time"
+  "log"
+  "os"
+  "time"
 
-	"github.com/zzopen/z-note/backend/internal/config"
-	"gorm.io/driver/sqlite"
-	"gorm.io/gorm"
-	"gorm.io/gorm/logger"
+  "github.com/zzopen/password-manager/backend/internal/config"
+  "gorm.io/driver/sqlite"
+  "gorm.io/gorm"
+  "gorm.io/gorm/logger"
 )
 
 var newLogger = logger.New(
@@ -24,16 +23,11 @@ var newLogger = logger.New(
 )
 
 func NewDb(c config.Config) *gorm.DB {
-	if c.Global.SqliteDirPath == "" {
-		panic("SqliteDirPath is empty")
+	if c.Sqlite.DbFilePath == "" {
+		panic("DbFilePath is empty")
 	}
 
-	if c.Global.SqliteDbName == "" {
-		panic("SqliteDbName is empty")
-	}
-
-	dbPath, _ := url.JoinPath(c.Global.SqliteDirPath, c.Global.SqliteDbName+".db")
-	db, err := gorm.Open(sqlite.Open(dbPath+"?mode=wal"), &gorm.Config{
+	db, err := gorm.Open(sqlite.Open(c.Sqlite.DbFilePath+"?mode=wal"), &gorm.Config{
 		Logger:                                   newLogger,
 		DisableForeignKeyConstraintWhenMigrating: true,
 	})

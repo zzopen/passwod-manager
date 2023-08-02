@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"github.com/zzopen/z-note/backend/internal/logic/jwt"
-	"github.com/zzopen/z-note/backend/internal/svc"
-	"github.com/zzopen/z-note/backend/internal/types"
+	"github.com/zzopen/password-manager/backend/internal/logic/jwt"
+	"github.com/zzopen/password-manager/backend/internal/svc"
+	"github.com/zzopen/password-manager/backend/internal/types"
 )
 
 func TokenHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {

@@ -1,7 +1,7 @@
 package errorx
 
 import (
-	"github.com/zzopen/z-note/backend/internal/core/response/codex"
+	"github.com/zzopen/password-manager/backend/internal/core/response/codex"
 )
 
 type CodeError struct {

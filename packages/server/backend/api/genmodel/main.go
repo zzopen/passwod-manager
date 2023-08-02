@@ -1,16 +1,14 @@
 package main
 
 import (
-	"flag"
-	"github.com/zeromicro/go-zero/core/conf"
-  "net/url"
-
+  "flag"
+  "github.com/zeromicro/go-zero/core/conf"
   "gorm.io/driver/sqlite"
-	"gorm.io/gen"
-	"gorm.io/gorm"
+  "gorm.io/gen"
+  "gorm.io/gorm"
 
-	"github.com/zzopen/z-note/backend/internal/config"
-	"github.com/zzopen/z-note/backend/internal/core/model"
+  "github.com/zzopen/password-manager/backend/internal/config"
+  "github.com/zzopen/password-manager/backend/internal/core/model"
 )
 
 // Dynamic SQL
@@ -33,8 +31,7 @@ func main() {
 	})
 
 	// gormDb, _ := gorm.Open(mysql.Open("root:@(127.0.0.1:3306)/demo?charset=utf8mb4&parseTime=True&loc=Local"))
-  dbPath, _ := url.JoinPath(c.Global.SqliteDirPath, c.Global.SqliteDbName+".db")
-	gormDb, _ := gorm.Open(sqlite.Open(dbPath+"?mode=wal"), &gorm.Config{})
+	gormDb, _ := gorm.Open(sqlite.Open(c.Sqlite.DbFilePath+"?mode=wal"), &gorm.Config{})
 	g.UseDB(gormDb) // reuse your gorm db
 
 	// Generate basic type-safe DAO API for struct `model.User` following conventions

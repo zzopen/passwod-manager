@@ -1,32 +1,26 @@
-import type { CustomWorker } from '@main/worker'
-
 /**** 全局共享对象 ****/
 interface ShareState {
   exeDirPath: string
-  appDataDirPath: string
-  configDirPath: string
   userDataDirPath: string
-  dataDirPath: string
-  songCachePath: string
-  songCacheDefautDirPath: string
-  dbDirPath: string
+  appDataDirPath: string
+  parentDirPath: string
+  customUserDataDirPath: string
+  backend: Backend
   isDev: boolean
-  worker?: CustomWorker
+  Worker?: any
 }
 
-const defaultShareState: ShareState = {
-  exeDirPath: '',
-  appDataDirPath: '',
-  userDataDirPath: '',
-  configDirPath: '',
-  dataDirPath: '',
-  songCachePath: '',
-  songCacheDefautDirPath: '',
-  dbDirPath: '',
-  isDev: true,
-  worker: undefined
+interface Backend {
+  host: string
+  port: string
+  healthPort: string
+  sqlite: Sqlite
 }
 
-const shareState: ShareState = { ...defaultShareState }
-export type { ShareState }
-export { shareState }
+interface Sqlite {
+  dirPath: string
+  dbName: string
+  dbFilePath: string
+}
+
+export type { ShareState, Backend, Sqlite }

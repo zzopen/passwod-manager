@@ -3,9 +3,9 @@ package example
 import (
 	"context"
 	"github.com/zeromicro/go-zero/core/logx"
-	"github.com/zzopen/z-note/backend/internal/core/response/responsex"
-	"github.com/zzopen/z-note/backend/internal/svc"
-	"github.com/zzopen/z-note/backend/internal/types"
+	"github.com/zzopen/password-manager/backend/internal/core/response/responsex"
+	"github.com/zzopen/password-manager/backend/internal/svc"
+	"github.com/zzopen/password-manager/backend/internal/types"
 )
 
 type T1Logic struct {

@@ -3,11 +3,11 @@ package jwt
 import (
 	"context"
 	"github.com/golang-jwt/jwt/v4"
-	"github.com/zzopen/z-note/backend/internal/core/response/responsex"
+	"github.com/zzopen/password-manager/backend/internal/core/response/responsex"
 	"time"
 
-	"github.com/zzopen/z-note/backend/internal/svc"
-	"github.com/zzopen/z-note/backend/internal/types"
+	"github.com/zzopen/password-manager/backend/internal/svc"
+	"github.com/zzopen/password-manager/backend/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

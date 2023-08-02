@@ -1,21 +1,21 @@
 package main
 
 import (
-  "context"
-  "flag"
-  "fmt"
-  "github.com/zeromicro/go-zero/core/conf"
-  "github.com/zeromicro/go-zero/core/logx"
-  "github.com/zeromicro/go-zero/rest"
-  handler2 "github.com/zeromicro/go-zero/rest/handler"
-  "github.com/zeromicro/go-zero/rest/httpx"
-  "net/http"
-  "runtime/debug"
+	"context"
+	"flag"
+	"fmt"
+	"github.com/zeromicro/go-zero/core/conf"
+	"github.com/zeromicro/go-zero/core/logx"
+	"github.com/zeromicro/go-zero/rest"
+	handler2 "github.com/zeromicro/go-zero/rest/handler"
+	"github.com/zeromicro/go-zero/rest/httpx"
+	"net/http"
+	"runtime/debug"
 
-  "github.com/zzopen/z-note/backend/internal/config"
-  "github.com/zzopen/z-note/backend/internal/core/response/errorx"
-  "github.com/zzopen/z-note/backend/internal/handler"
-  "github.com/zzopen/z-note/backend/internal/svc"
+	"github.com/zzopen/password-manager/backend/internal/config"
+	"github.com/zzopen/password-manager/backend/internal/core/response/errorx"
+	"github.com/zzopen/password-manager/backend/internal/handler"
+	"github.com/zzopen/password-manager/backend/internal/svc"
 )
 
 var configFile = flag.String("f", "etc/backend-api.yaml", "the config file")
@@ -53,7 +53,7 @@ func globalHandler(server *rest.Server, serverCtx *svc.ServiceContext, ctx conte
 	// 全局错误处理器
 	httpx.SetErrorHandler(func(err error) (int, interface{}) {
 		logx.Info("err:%#v", err)
-    logx.Info(string(debug.Stack()))
+		logx.Info(string(debug.Stack()))
 
 		switch e := err.(type) {
 		case *errorx.CodeError:
@@ -70,7 +70,7 @@ func globalHandler(server *rest.Server, serverCtx *svc.ServiceContext, ctx conte
 	server.Use(func(next http.HandlerFunc) http.HandlerFunc {
 		return func(w http.ResponseWriter, r *http.Request) {
 			w.Header().Add("X-Middleware", "second")
-      logx.Info("全局中间件")
+			logx.Info("全局中间件")
 			next(w, r)
 		}
 	})

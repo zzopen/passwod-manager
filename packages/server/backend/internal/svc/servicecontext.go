@@ -2,10 +2,10 @@ package svc
 
 import (
 	"github.com/zeromicro/go-zero/rest"
-	"github.com/zzopen/z-note/backend/internal/config"
-	"github.com/zzopen/z-note/backend/internal/core/model"
-	"github.com/zzopen/z-note/backend/internal/core/query"
-	"github.com/zzopen/z-note/backend/internal/db/sqlite"
+	"github.com/zzopen/password-manager/backend/internal/config"
+	"github.com/zzopen/password-manager/backend/internal/core/model"
+	"github.com/zzopen/password-manager/backend/internal/core/query"
+	"github.com/zzopen/password-manager/backend/internal/db/sqlite"
 
 	"gorm.io/gorm"
 )

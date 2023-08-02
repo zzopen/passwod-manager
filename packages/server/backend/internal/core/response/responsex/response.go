@@ -1,8 +1,8 @@
 package responsex
 
 import (
-	"github.com/zzopen/z-note/backend/internal/core/response/codex"
-	"github.com/zzopen/z-note/backend/internal/types"
+	"github.com/zzopen/password-manager/backend/internal/core/response/codex"
+	"github.com/zzopen/password-manager/backend/internal/types"
 )
 
 type ApiResponse = types.Reply

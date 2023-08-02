@@ -17,7 +17,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"github.com/zzopen/z-note/backend/internal/core/model"
+	"github.com/zzopen/password-manager/backend/internal/core/model"
 )
 
 func newWebsite(db *gorm.DB, opts ...gen.DOOption) website {

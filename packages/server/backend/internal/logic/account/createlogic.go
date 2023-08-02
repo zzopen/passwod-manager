@@ -2,11 +2,11 @@ package account
 
 import (
 	"context"
-	"github.com/zzopen/z-note/backend/internal/core/model"
-	"github.com/zzopen/z-note/backend/internal/core/query"
-	"github.com/zzopen/z-note/backend/internal/core/response/responsex"
-	"github.com/zzopen/z-note/backend/internal/svc"
-	"github.com/zzopen/z-note/backend/internal/types"
+	"github.com/zzopen/password-manager/backend/internal/core/model"
+	"github.com/zzopen/password-manager/backend/internal/core/query"
+	"github.com/zzopen/password-manager/backend/internal/core/response/responsex"
+	"github.com/zzopen/password-manager/backend/internal/svc"
+	"github.com/zzopen/password-manager/backend/internal/types"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )

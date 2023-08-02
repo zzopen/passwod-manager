@@ -1,4 +1,4 @@
-module github.com/zzopen/z-note/backend
+module github.com/zzopen/password-manager/backend
 
 go 1.20
 

@@ -3,7 +3,7 @@ package model
 // https://www.printlove.cn/tools/sql2gorm
 
 import (
-	"github.com/zzopen/z-note/backend/internal/core/model/datatypes"
+	"github.com/zzopen/password-manager/backend/internal/core/model/datatypes"
 )
 
 type BaseModel struct {
