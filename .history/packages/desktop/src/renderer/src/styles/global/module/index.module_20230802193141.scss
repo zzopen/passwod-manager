@@ -1,0 +1,16 @@
+@import '../namespace.scss';
+@import '../variables';
+
+:export {
+	namespace: $namespace;
+  // class name
+	nsLayout: $ns-layout;
+	nsLayoutContent: $ns-layout-content;
+	nsLayoutHeader: $ns-layout-header;
+	nsLayoutFooter: $ns-layout-footer;
+	nsLayoutSider: $ns-layout-sider;
+	nsAppLogo: $ns-app-logo;
+  // variables
+  nsLayoutLeftBackgroundColor: $ns-layout-left-background-color;
+  nsLayoutLeftWidth: $layout-left-width
+}

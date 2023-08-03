@@ -1,0 +1,45 @@
+<script setup lang="ts">
+import { CSSProperties } from 'vue'
+import BLayoutCenter from '@/business/views/components/layout/layout-center'
+import BLayoutContent from '@/business/views/components/layout/layout-content'
+import { businessCls } from '@/styles/module'
+
+defineOptions({
+  name: 'LayoutRight',
+  inheritAttrs: false
+})
+
+const contentStyle = computed<CSSProperties>(() => {
+  return {}
+})
+
+const siderProps = computed(() => {
+  return {
+    width: businessCls.bLayoutRightSiderWidth
+  }
+})
+
+const siderStyle = computed<CSSProperties>(() => {
+  return {
+    height: '100%',
+    backgroundColor: businessCls.bLayoutRightSiderBackgroundColor
+  }
+})
+</script>
+
+<template>
+  <a-layout class="layout-right" style="width: 100%; height: 100%">
+    <a-layout-sider :style="siderStyle" v-bind="siderProps">
+      <b-layout-center />
+    </a-layout-sider>
+    <a-layout style="width: 100%; height: 100%">
+      <a-layout-content :style="contentStyle">
+        <b-layout-content />
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
+</template>
+
+<style lang="scss" scoped>
+@import './index.scss';
+</style>

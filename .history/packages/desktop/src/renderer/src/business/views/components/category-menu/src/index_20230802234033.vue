@@ -1,0 +1,81 @@
+<script setup lang="ts">
+import { h, CSSProperties } from 'vue'
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue'
+import type { MenuProps, ItemType } from 'ant-design-vue'
+import { getMenuItem } from '@/business/utils'
+
+defineOptions({
+  name: 'CategoryMenu',
+  inheritAttrs: false
+})
+
+const selectedKeys = ref<string[]>(['1'])
+const openKeys = ref<string[]>(['sub1'])
+
+const items: ItemType[] = reactive([
+  getMenuItem('Navigation One', 'sub1', () => h(MailOutlined), [
+    getMenuItem(
+      'Item 1',
+      'g1',
+      null,
+      [getMenuItem('Option 1', '1'), getMenuItem('Option 2', '2')],
+      'group'
+    ),
+    getMenuItem(
+      'Item 2',
+      'g2',
+      null,
+      [getMenuItem('Option 3', '3'), getMenuItem('Option 4', '4')],
+      'group'
+    )
+  ]),
+
+  getItem('Navigation Two', 'sub2', () => h(AppstoreOutlined), [
+    getItem('Option 5', '5'),
+    getItem('Option 6', '6'),
+    getItem('Submenu', 'sub3', null, [getItem('Option 7', '7'), getItem('Option 8', '8')])
+  ]),
+
+  { type: 'divider' },
+
+  getItem('Navigation Three', 'sub4', () => h(SettingOutlined), [
+    getItem('Option 9', '9'),
+    getItem('Option 10', '10'),
+    getItem('Option 11', '11'),
+    getItem('Option 12', '12')
+  ]),
+
+  getItem('Group', 'grp', null, [getItem('Option 13', '13'), getItem('Option 14', '14')], 'group')
+])
+
+const handleClick: MenuProps['onClick'] = (e) => {
+  console.log('click', e)
+}
+
+watch(openKeys, (val) => {
+  console.log('openKeys', val)
+})
+
+const menuStyle: CSSProperties = {
+  backgroundColor: '#3f4361',
+  color: 'white'
+}
+</script>
+
+<template>
+  <div class="category-menu">
+    <a-menu
+      id="dddddd"
+      v-model:openKeys="openKeys"
+      v-model:selectedKeys="selectedKeys"
+      :style="menuStyle"
+      mode="inline"
+      :items="items"
+      @click="handleClick"
+    ></a-menu>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+@import './index.scss';
+</style>

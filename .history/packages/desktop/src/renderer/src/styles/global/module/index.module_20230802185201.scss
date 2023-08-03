@@ -1,0 +1,16 @@
+@import '../namespace.scss';
+@import '../variables';
+
+:export {
+	namespace: $namespace;
+  // class name
+	layout: $namespace-layout;
+	layoutContent: $namespace-layout-content;
+	layoutHeader: $namespace-layout-header;
+	layoutFooter: $namespace-layout-footer;
+	layoutSider: $namespace-layout-sider;
+	appLogo: $namespace-app-logo;
+  // variables
+  layoutLeftWidth: $layout-left-width;
+  bLayoutCenterWidth: $b-layout-center-width;
+}

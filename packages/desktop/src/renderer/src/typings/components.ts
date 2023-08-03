@@ -12,7 +12,7 @@ const LOGIN_ROUTE: Route = {
 
 const HOME_ROUTE: Route = {
   name: 'Home',
-  path: '/discover'
+  path: '/home'
 }
 
 const PAGE_NOT_FOUND_ROUTE: Route = {
@@ -41,16 +41,16 @@ const PageNotFoundRoute: AppRouteRecordRaw = {
   }
 }
 
-const BUILT_IN_ROUTES = [LoginRoute, PageNotFoundRoute]
+const BUILT_IN_ROUTES: AppRouteRecordRaw[] = [LoginRoute, PageNotFoundRoute]
 
 export {
+  BUILT_IN_ROUTES,
   LoginRoute,
   PageNotFoundRoute,
   ROOT_ROUTE,
   HOME_ROUTE,
   LOGIN_ROUTE,
   PAGE_NOT_FOUND_ROUTE,
-  BUILT_IN_ROUTES,
   LOGIN_COMPONENT,
   EXCEPTION_COMPONENT,
   LAYOUT_COMPONENT

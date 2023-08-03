@@ -1,0 +1,6 @@
+.category-menu {
+  height: calc(100% - 200px);
+  margin-bottom: 200px;
+  overflow-y: auto; /* 设置垂直滚动条 */
+  overflow-x: hidden; /* 隐藏水平滚动条 */
+}
