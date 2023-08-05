@@ -1,6 +1,7 @@
-import { withInstall } from '@/utils'
+import { withInstall } from '../shared/utils'
 import modal from './src/index.vue'
-export * from './src/props'
+import './src/modal.scss'
 
 export const Modal = withInstall(modal)
 export default Modal
+export * from './src/modal-props'

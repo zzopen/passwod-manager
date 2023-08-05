@@ -1,0 +1,23 @@
+<script setup lang="ts">
+import { useCls } from '@renderer/composables'
+import { globalCls } from '@renderer/styles/module'
+
+defineOptions({
+  name: 'FormBase',
+  inheritAttrs: false
+})
+
+const { nsCls } = useCls(globalCls.nsFormBase)
+const getClass = computed(() => {
+  return [nsCls]
+})
+</script>
+
+<template>
+  <div :class="getClass"></div>
+</template>
+
+<style scoped lang="scss">
+@import './index.scss';
+</style>
+@renderer/hooks

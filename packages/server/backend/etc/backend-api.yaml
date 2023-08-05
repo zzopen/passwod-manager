@@ -1,6 +1,6 @@
 Name: backend-api
 Host: 0.0.0.0
-Port: 7000
+Port: 7002
 Mode: dev
 Timeout: 10000
 DevServer:

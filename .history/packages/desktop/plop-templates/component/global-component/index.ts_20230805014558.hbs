@@ -1,0 +1,6 @@
+import {withInstall} from '@renderer/components/_utils'
+import {{ camelCase component_name }} from './src/index.vue'
+export * from './src/props'
+
+export const {{ pascalCase component_name }} = withInstall({{ camelCase component_name }})
+export default {{ pascalCase component_name }}

@@ -1,0 +1,7 @@
+import { ExtractPropTypes } from 'vue'
+
+export const {{ camelCaseComponentName }}Props = () => {
+  return {} as const
+}
+
+export type {{ pascalCaseComponentName }}Props = Partial<ExtractPropTypes<ReturnType<typeof {{ camelCaseComponentName }}Props>>>

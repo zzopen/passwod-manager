@@ -1,0 +1,14 @@
+<script setup lang="ts">
+import { useNamespace } from '@renderer/shared/hooks'
+
+defineOptions({ name: 'L{{ pascalCaseComponentName }}', inheritAttrs: false })
+
+const { b } = useNamespace('{{ kebabCaseComponentName }}')
+const getClass = computed(() => {
+  return [b()]
+})
+</script>
+
+<template>
+  <div :class="getClass"></div>
+</template>

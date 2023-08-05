@@ -1,0 +1,42 @@
+<script setup lang="ts">
+import {useE} from '@/stores'
+defineOptions({
+  name: 'AddCategoryDrawer',
+  inheritAttrs: false
+})
+
+const open = computed(() => {
+  return
+})
+
+const afterOpenChange = (bool: boolean) => {
+  console.log('open', bool)
+}
+
+const showDrawer = () => {
+  open.value = true
+}
+</script>
+
+<template>
+  <div class="add-category-drawer">
+    <a-drawer
+      v-model:open="open"
+      class="custom-class"
+      root-class-name="root-class-name"
+      :root-style="{ color: 'blue' }"
+      style="color: red"
+      title="Basic Drawer"
+      placement="right"
+      @after-open-change="afterOpenChange"
+    >
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+      <p>Some contents...</p>
+    </a-drawer>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+@import './index.scss';
+</style>

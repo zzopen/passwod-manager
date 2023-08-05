@@ -1,0 +1,26 @@
+<template>
+  <Teleport to="body"> </Teleport>
+</template>
+
+<script setup lang="ts">
+import { onKeyDown, consoleLog } from '@/business/utils'
+
+defineOptions({
+  name: 'CustomTeleport',
+  inheritAttrs: false
+})
+
+onKeyDown(
+  ' ',
+  (e) => {
+    consoleLog('Space key press', e)
+    playerStore.togglePlay()
+  },
+  { dedupe: true }
+)
+</script>
+
+<style scoped lang="scss">
+.custom-teleport {
+}
+</style>
