@@ -2,10 +2,10 @@ package jwt
 
 import (
 	"context"
-	"github.com/golang-jwt/jwt/v4"
-	"github.com/zzopen/password-manager/backend/internal/core/response/responsex"
+	"github.com/zzopen/password-manager/backend/internal/core/response"
 	"time"
 
+	"github.com/golang-jwt/jwt/v4"
 	"github.com/zzopen/password-manager/backend/internal/svc"
 	"github.com/zzopen/password-manager/backend/internal/types"
 
@@ -32,7 +32,7 @@ func (l *TokenLogic) Token(req *types.JwtTokenRequest) (resp *types.Reply, err e
 	now := time.Now().Unix()
 	accessToken, err := l.GenToken(now, l.svcCtx.Config.Auth.AccessSecret, nil, accessExpire)
 	if err != nil {
-		return nil, err
+		return nil, response.FailWithMsg("token 获取失败")
 	}
 
 	res := &types.JwtTokenInfo{
@@ -40,10 +40,10 @@ func (l *TokenLogic) Token(req *types.JwtTokenRequest) (resp *types.Reply, err e
 		AccessExpire: now + accessExpire,
 		RefreshAfter: now + accessExpire/2,
 	}
-	return responsex.SuccessWithData(res), nil
+	return response.SuccessWithData(res), nil
 }
 
-func (l *TokenLogic) GenToken(iat int64, secretKey string, payloads map[string]interface{}, seconds int64) (string, error) {
+func (l *TokenLogic) GenToken(iat int64, secretKey string, payloads map[string]any, seconds int64) (string, error) {
 	claims := make(jwt.MapClaims)
 	claims["exp"] = iat + seconds
 	claims["iat"] = iat

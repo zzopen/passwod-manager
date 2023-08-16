@@ -1,19 +1,20 @@
 package main
 
 import (
-	"context"
 	"flag"
 	"fmt"
+	"github.com/zzopen/password-manager/backend/internal/core/validator"
+	"net/http"
+	"runtime/debug"
+
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/core/logx"
 	"github.com/zeromicro/go-zero/rest"
 	handler2 "github.com/zeromicro/go-zero/rest/handler"
 	"github.com/zeromicro/go-zero/rest/httpx"
-	"net/http"
-	"runtime/debug"
 
 	"github.com/zzopen/password-manager/backend/internal/config"
-	"github.com/zzopen/password-manager/backend/internal/core/response/errorx"
+	"github.com/zzopen/password-manager/backend/internal/core/response"
 	"github.com/zzopen/password-manager/backend/internal/handler"
 	"github.com/zzopen/password-manager/backend/internal/svc"
 )
@@ -25,8 +26,6 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
-
-	ctx := context.Background()
 
 	server := rest.MustNewServer(c.RestConf,
 		rest.WithCustomCors(nil, func(w http.ResponseWriter) {
@@ -44,25 +43,26 @@ func main() {
 
 	sc := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, sc)
-	globalHandler(server, sc, ctx)
+	globalHandler(server)
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)
 	server.Start()
 }
 
-func globalHandler(server *rest.Server, serverCtx *svc.ServiceContext, ctx context.Context) {
+func globalHandler(server *rest.Server) {
+	httpx.SetValidator(validator.NewValidator())
+
 	// 全局错误处理器
-	httpx.SetErrorHandler(func(err error) (int, interface{}) {
+	httpx.SetErrorHandler(func(err error) (int, any) {
 		logx.Info("err:%#v", err)
 		logx.Info(string(debug.Stack()))
 
 		switch e := err.(type) {
-		case *errorx.CodeError:
+		case *response.ApiError:
 			return http.StatusOK, e.Data()
 		case error:
-			newErr := errorx.Error(e.Error())
-			return http.StatusOK, newErr.Data()
+			return http.StatusOK, response.NewDefaultApiErrorData(e.Error())
 		default:
-			return http.StatusInternalServerError, nil
+			return http.StatusInternalServerError, err
 		}
 	})
 
@@ -80,7 +80,7 @@ func globalHandler(server *rest.Server, serverCtx *svc.ServiceContext, ctx conte
 // 路由不存在, 404
 func notFoundHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		httpx.Error(w, errorx.Error("路由不存在"))
+		httpx.Error(w, response.FailWithMsg("路由不存在"))
 		return
 	}
 }
@@ -88,7 +88,7 @@ func notFoundHandler() http.HandlerFunc {
 // 不允许访问
 func notAllowedHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		httpx.Error(w, errorx.Error("禁止访问"))
+		httpx.Error(w, response.FailWithMsg("禁止访问"))
 		return
 	}
 }
@@ -96,7 +96,7 @@ func notAllowedHandler() http.HandlerFunc {
 // JWT授权不通过,http code 401
 func unauthorizedCallback() handler2.UnauthorizedCallback {
 	return func(w http.ResponseWriter, r *http.Request, err error) {
-		httpx.Error(w, errorx.Error("JWT授权不通过"))
+		httpx.Error(w, response.FailWithMsg("JWT授权不通过"))
 		return
 	}
 }

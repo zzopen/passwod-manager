@@ -1,25 +1,9 @@
 package sqlite
 
 import (
-  "log"
-  "os"
-  "time"
-
-  "github.com/zzopen/password-manager/backend/internal/config"
-  "gorm.io/driver/sqlite"
-  "gorm.io/gorm"
-  "gorm.io/gorm/logger"
-)
-
-var newLogger = logger.New(
-	log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
-	logger.Config{
-		SlowThreshold:             time.Second, // Slow SQL threshold
-		LogLevel:                  logger.Info, // Log level
-		IgnoreRecordNotFoundError: true,        // Ignore ErrRecordNotFound error for logger
-		ParameterizedQueries:      true,        // Don't include params in the SQL log
-		Colorful:                  false,       // Disable color
-	},
+	"github.com/zzopen/password-manager/backend/internal/config"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
 )
 
 func NewDb(c config.Config) *gorm.DB {
@@ -28,7 +12,8 @@ func NewDb(c config.Config) *gorm.DB {
 	}
 
 	db, err := gorm.Open(sqlite.Open(c.Sqlite.DbFilePath+"?mode=wal"), &gorm.Config{
-		Logger:                                   newLogger,
+		Logger:                                   NewDbLogger(c),
+		SkipDefaultTransaction:                   true,
 		DisableForeignKeyConstraintWhenMigrating: true,
 	})
 	if err != nil {

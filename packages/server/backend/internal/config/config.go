@@ -12,5 +12,8 @@ type Config struct {
 
 	Sqlite struct {
 		DbFilePath string
+    Log struct {
+      Level string
+    }
 	}
 }

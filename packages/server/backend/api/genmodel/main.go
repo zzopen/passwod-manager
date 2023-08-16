@@ -1,21 +1,18 @@
 package main
 
 import (
-  "flag"
-  "github.com/zeromicro/go-zero/core/conf"
-  "gorm.io/driver/sqlite"
-  "gorm.io/gen"
-  "gorm.io/gorm"
+	"flag"
 
-  "github.com/zzopen/password-manager/backend/internal/config"
-  "github.com/zzopen/password-manager/backend/internal/core/model"
+	"github.com/zeromicro/go-zero/core/conf"
+	"gorm.io/driver/sqlite"
+	"gorm.io/gen"
+	"gorm.io/gorm"
+
+	"github.com/zzopen/password-manager/backend/internal/config"
+	"github.com/zzopen/password-manager/backend/internal/core/model"
 )
 
-// Dynamic SQL
-type Querier interface {
-	// SELECT * FROM @@table WHERE name = @name{{if role !=""}} AND role = @role{{end}}
-	FilterWithNameAndRole(name, role string) ([]gen.T, error)
-}
+type Querier interface{}
 
 func main() {
 
@@ -26,8 +23,10 @@ func main() {
 	conf.MustLoad(*configFile, &c)
 
 	g := gen.NewGenerator(gen.Config{
-		OutPath: "../../internal/core/query",
-		Mode:    gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
+		OutPath:          "../../internal/core/query",
+		Mode:             gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
+		FieldWithTypeTag: true,
+		FieldCoverable:   true,
 	})
 
 	// gormDb, _ := gorm.Open(mysql.Open("root:@(127.0.0.1:3306)/demo?charset=utf8mb4&parseTime=True&loc=Local"))
@@ -37,7 +36,7 @@ func main() {
 	// Generate basic type-safe DAO API for struct `model.User` following conventions
 	//g.ApplyBasic(model.User{})
 
-	models := []interface{}{model.Account{}, model.Website{}, model.Category{}, model.AccountCategory{}}
+	models := []any{model.SecretBook{}, model.SecretCategory{}, model.MyTest{}}
 	g.ApplyBasic(models...)
 
 	// Generate Type Safe API with Dynamic SQL defined on Querier interface for `model.User` and `model.Company`

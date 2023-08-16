@@ -16,49 +16,44 @@ import (
 )
 
 var (
-	Q               = new(Query)
-	Account         *account
-	AccountCategory *accountCategory
-	Category        *category
-	Website         *website
+	Q              = new(Query)
+	MyTest         *myTest
+	SecretBook     *secretBook
+	SecretCategory *secretCategory
 )
 
 func SetDefault(db *gorm.DB, opts ...gen.DOOption) {
 	*Q = *Use(db, opts...)
-	Account = &Q.Account
-	AccountCategory = &Q.AccountCategory
-	Category = &Q.Category
-	Website = &Q.Website
+	MyTest = &Q.MyTest
+	SecretBook = &Q.SecretBook
+	SecretCategory = &Q.SecretCategory
 }
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:              db,
-		Account:         newAccount(db, opts...),
-		AccountCategory: newAccountCategory(db, opts...),
-		Category:        newCategory(db, opts...),
-		Website:         newWebsite(db, opts...),
+		db:             db,
+		MyTest:         newMyTest(db, opts...),
+		SecretBook:     newSecretBook(db, opts...),
+		SecretCategory: newSecretCategory(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	Account         account
-	AccountCategory accountCategory
-	Category        category
-	Website         website
+	MyTest         myTest
+	SecretBook     secretBook
+	SecretCategory secretCategory
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:              db,
-		Account:         q.Account.clone(db),
-		AccountCategory: q.AccountCategory.clone(db),
-		Category:        q.Category.clone(db),
-		Website:         q.Website.clone(db),
+		db:             db,
+		MyTest:         q.MyTest.clone(db),
+		SecretBook:     q.SecretBook.clone(db),
+		SecretCategory: q.SecretCategory.clone(db),
 	}
 }
 
@@ -72,27 +67,24 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:              db,
-		Account:         q.Account.replaceDB(db),
-		AccountCategory: q.AccountCategory.replaceDB(db),
-		Category:        q.Category.replaceDB(db),
-		Website:         q.Website.replaceDB(db),
+		db:             db,
+		MyTest:         q.MyTest.replaceDB(db),
+		SecretBook:     q.SecretBook.replaceDB(db),
+		SecretCategory: q.SecretCategory.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	Account         IAccountDo
-	AccountCategory IAccountCategoryDo
-	Category        ICategoryDo
-	Website         IWebsiteDo
+	MyTest         IMyTestDo
+	SecretBook     ISecretBookDo
+	SecretCategory ISecretCategoryDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		Account:         q.Account.WithContext(ctx),
-		AccountCategory: q.AccountCategory.WithContext(ctx),
-		Category:        q.Category.WithContext(ctx),
-		Website:         q.Website.WithContext(ctx),
+		MyTest:         q.MyTest.WithContext(ctx),
+		SecretBook:     q.SecretBook.WithContext(ctx),
+		SecretCategory: q.SecretCategory.WithContext(ctx),
 	}
 }
 

@@ -7,7 +7,9 @@ info(
 )
 
 import "base.api"
+import "jwt.api"
 import "example.api"
-import "account.api"
+import "secret-book.api"
+import "secret-category.api"
 
 service backend-api {}

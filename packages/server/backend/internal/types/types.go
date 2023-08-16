@@ -7,32 +7,71 @@ type Reply struct {
 	Data interface{} `json:"data,omitempty"`
 }
 
-type AccountCreateReq struct {
-	Website  string `form:"website"`
-	Account  string `form:"account"`
-	Password string `form:"password"`
-	Mobile   string `form:"mobile,optional"`
-	Email    string `form:"email,optional"`
-	Remark   string `form:"remark,optional"`
+type JwtTokenRequest struct {
 }
 
-type AccountDetailReq struct {
-	Id string `path:"id"`
+type JwtTokenInfo struct {
+	AccessToken  string `json:"access_token"`
+	AccessExpire int64  `json:"access_expire"`
+	RefreshAfter int64  `json:"refresh_after"` // 建议客户端刷新token的绝对时间
 }
 
-type AccountDeleteReq struct {
-	Id string `path:"id"`
+type SecretBookCreateReq struct {
+	Title            string `form:"title,optional" validate:"required" label:"标题"`
+	Website          string `form:"website,optional" validate:"required" label:"网址"`
+	Username         string `form:"username,optional" validate:"required" label:"账号"`
+	Password         string `form:"password,optional" validate:"required" label:"密码"`
+	Mobile           string `form:"mobile,optional"`
+	Email            string `form:"email,optional"`
+	Remark           string `form:"remark,optional"`
+	SecretCategoryId string `form:"secret_category_id,optional"`
 }
 
-type AccountUpdateReq struct {
-	Id       string `form:"id"`
-	Website  string `form:"website"`
-	Account  string `form:"account"`
-	Password string `form:"password"`
-	Mobile   string `form:"mobile"`
-	Email    string `form:"email"`
-	Remark   string `form:"remark"`
+type SecretBookDeleteReq struct {
+	Id string `form:"id,optional" validate:"required" label:"ID"`
 }
 
-type AccountListReq struct {
+type SecretBookUpdateReq struct {
+	Id               string `form:"id,optional"`
+	Title            string `form:"title,optional" validate:"required" label:"标题"`
+	Website          string `form:"website,optional" validate:"required" label:"网址"`
+	Username         string `form:"username,optional" validate:"required" label:"账号"`
+	Password         string `form:"password,optional" validate:"required" label:"密码"`
+	Mobile           string `form:"mobile,optional"`
+	Email            string `form:"email,optional"`
+	Remark           string `form:"remark,optional"`
+	SecretCategoryId string `form:"secret_category_id,optional"`
+}
+
+type SecretBookDetailReq struct {
+	Id string `form:"id,optional" validate:"required" label:"ID"`
+}
+
+type SecretBookListReq struct {
+	SecretCategoryId string `form:"secret_category_id,optional"`
+}
+
+type SecretCategoryCreateReq struct {
+	Name string `form:"name,optional" validate:"required" label:"名称"`
+	Pid  string `form:"pid,optional"`
+}
+
+type SecretCategoryDeleteReq struct {
+	Id string `form:"id,optional" validate:"required" label:"ID"`
+}
+
+type SecretCategoryUpdateReq struct {
+	Id   string `form:"id,optional" validate:"required" label:"ID"`
+	Name string `form:"name,optional" validate:"required" label:"名称"`
+	Pid  string `form:"pid,optional"`
+}
+
+type SecretCategoryDetailReq struct {
+	Id string `form:"id,optional" validate:"required" label:"ID"`
+}
+
+type SecretCategoryListReq struct {
+}
+
+type SecretCategoryTreeListReq struct {
 }

@@ -4,8 +4,10 @@ package handler
 import (
 	"net/http"
 
-	account "github.com/zzopen/password-manager/backend/internal/handler/account"
 	example "github.com/zzopen/password-manager/backend/internal/handler/example"
+	jwt "github.com/zzopen/password-manager/backend/internal/handler/jwt"
+	secretbook "github.com/zzopen/password-manager/backend/internal/handler/secretbook"
+	secretcategory "github.com/zzopen/password-manager/backend/internal/handler/secretcategory"
 	"github.com/zzopen/password-manager/backend/internal/svc"
 
 	"github.com/zeromicro/go-zero/rest"
@@ -14,6 +16,17 @@ import (
 func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 	server.AddRoutes(
 		[]rest.Route{},
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/token",
+				Handler: jwt.TokenHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/jwt"),
 	)
 
 	server.AddRoutes(
@@ -32,29 +45,65 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/create",
-				Handler: account.CreateHandler(serverCtx),
+				Handler: secretbook.CreateHandler(serverCtx),
 			},
 			{
-				Method:  http.MethodDelete,
-				Path:    "/delete/:id",
-				Handler: account.DeleteHandler(serverCtx),
+				Method:  http.MethodPost,
+				Path:    "/delete",
+				Handler: secretbook.DeleteHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
 				Path:    "/update",
-				Handler: account.UpdateHandler(serverCtx),
+				Handler: secretbook.UpdateHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
 				Path:    "/list",
-				Handler: account.ListHandler(serverCtx),
+				Handler: secretbook.ListHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodGet,
-				Path:    "/detail/:id",
-				Handler: account.DetailHandler(serverCtx),
+				Path:    "/detail",
+				Handler: secretbook.DetailHandler(serverCtx),
 			},
 		},
-		rest.WithPrefix("/account"),
+		rest.WithPrefix("/secretbook"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/create",
+				Handler: secretcategory.CreateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/delete",
+				Handler: secretcategory.DeleteHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/update",
+				Handler: secretcategory.UpdateHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/detail",
+				Handler: secretcategory.DetailHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/list",
+				Handler: secretcategory.ListHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/treeList",
+				Handler: secretcategory.TreeListHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/secretcategory"),
 	)
 }
