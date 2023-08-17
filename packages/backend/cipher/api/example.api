@@ -1,0 +1,19 @@
+syntax = "v1"
+
+info(
+	author: "许磊"
+  date:   "2023-08-01"
+	desc:   "example模块"
+)
+
+
+@server (
+    group: example
+    prefix: example
+)
+
+service cipher-api {
+	@doc "测试"
+	@handler t1
+	get /t1 returns (Reply)
+}

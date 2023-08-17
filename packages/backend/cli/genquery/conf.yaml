@@ -1,0 +1,3 @@
+QueryPath: ../../common/core/query
+Sqlite:
+  DbFilePath: /Users/xulei/Downloads/password-manager/data/db/password.db

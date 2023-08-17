@@ -1,0 +1,15 @@
+syntax = "v1"
+
+info(
+	author: "许磊"
+	date:   "2023-08-01"
+	desc:   "cipher-api"
+)
+
+import "base.api"
+import "jwt.api"
+import "example.api"
+import "secret-book.api"
+import "secret-category.api"
+
+service cipher-api {}
