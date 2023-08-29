@@ -14,4 +14,5 @@ dev:
 		@$(MAKE_CIPHER_MAKEFILE) dev
 
 test:
+		@echo "Test ..."
 

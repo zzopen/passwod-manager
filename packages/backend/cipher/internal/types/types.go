@@ -17,57 +17,57 @@ type JwtTokenInfo struct {
 }
 
 type SecretBookCreateReq struct {
-	Title            string `form:"title,optional" validate:"required" label:"标题"`
-	Website          string `form:"website,optional" validate:"required" label:"网址"`
-	Username         string `form:"username,optional" validate:"required" label:"账号"`
-	Password         string `form:"password,optional" validate:"required" label:"密码"`
-	Mobile           string `form:"mobile,optional"`
-	Email            string `form:"email,optional"`
-	Remark           string `form:"remark,optional"`
-	SecretCategoryId string `form:"secret_category_id,optional"`
+	Title            string `json:"title,optional" validate:"required" label:"标题"`
+	Website          string `json:"website,optional" validate:"required" label:"网址"`
+	Username         string `json:"username,optional" validate:"required" label:"账号"`
+	Password         string `json:"password,optional" validate:"required" label:"密码"`
+	Mobile           string `json:"mobile,optional"`
+	Email            string `json:"email,optional"`
+	Remark           string `json:"remark,optional"`
+	SecretCategoryId string `json:"secret_category_id,optional"`
 }
 
 type SecretBookDeleteReq struct {
-	Id string `form:"id,optional" validate:"required" label:"ID"`
+	Id string `json:"id,optional" validate:"required" label:"ID"`
 }
 
 type SecretBookUpdateReq struct {
-	Id               string `form:"id,optional"`
-	Title            string `form:"title,optional" validate:"required" label:"标题"`
-	Website          string `form:"website,optional" validate:"required" label:"网址"`
-	Username         string `form:"username,optional" validate:"required" label:"账号"`
-	Password         string `form:"password,optional" validate:"required" label:"密码"`
-	Mobile           string `form:"mobile,optional"`
-	Email            string `form:"email,optional"`
-	Remark           string `form:"remark,optional"`
-	SecretCategoryId string `form:"secret_category_id,optional"`
+	Id               string `json:"id,optional"`
+	Title            string `json:"title,optional" validate:"required" label:"标题"`
+	Website          string `json:"website,optional" validate:"required" label:"网址"`
+	Username         string `json:"username,optional" validate:"required" label:"账号"`
+	Password         string `json:"password,optional" validate:"required" label:"密码"`
+	Mobile           string `json:"mobile,optional"`
+	Email            string `json:"email,optional"`
+	Remark           string `json:"remark,optional"`
+	SecretCategoryId string `json:"secret_category_id,optional"`
 }
 
 type SecretBookDetailReq struct {
-	Id string `form:"id,optional" validate:"required" label:"ID"`
+	Id string `json:"id,optional" validate:"required" label:"ID"`
 }
 
 type SecretBookListReq struct {
-	SecretCategoryId string `form:"secret_category_id,optional"`
+	SecretCategoryId string `json:"secret_category_id,optional"`
 }
 
 type SecretCategoryCreateReq struct {
-	Name string `form:"name,optional" validate:"required" label:"名称"`
-	Pid  string `form:"pid,optional"`
+	Name string `json:"name,optional" validate:"required" label:"名称"`
+	Pid  string `json:"pid,optional"`
 }
 
 type SecretCategoryDeleteReq struct {
-	Id string `form:"id,optional" validate:"required" label:"ID"`
+	Id string `json:"id,optional" validate:"required" label:"ID"`
 }
 
 type SecretCategoryUpdateReq struct {
-	Id   string `form:"id,optional" validate:"required" label:"ID"`
-	Name string `form:"name,optional" validate:"required" label:"名称"`
-	Pid  string `form:"pid,optional"`
+	Id   string `json:"id,optional" validate:"required" label:"ID"`
+	Name string `json:"name,optional" validate:"required" label:"名称"`
+	Pid  string `json:"pid,optional"`
 }
 
 type SecretCategoryDetailReq struct {
-	Id string `form:"id,optional" validate:"required" label:"ID"`
+	Id string `json:"id,optional" validate:"required" label:"ID"`
 }
 
 type SecretCategoryListReq struct {

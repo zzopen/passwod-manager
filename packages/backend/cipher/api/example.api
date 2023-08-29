@@ -1,11 +1,12 @@
 syntax = "v1"
 
+import "base.api"
+
 info(
 	author: "许磊"
   date:   "2023-08-01"
 	desc:   "example模块"
 )
-
 
 @server (
     group: example
