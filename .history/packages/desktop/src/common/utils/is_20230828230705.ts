@@ -1,0 +1,1 @@
+const isEmptyArray = (arr: any) => {}

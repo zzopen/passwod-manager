@@ -1,0 +1,6 @@
+import { withInstall } from '../shared/utils'
+import {{ camelCaseComponentName }} from './src/index.vue'
+
+export const {{ pascalCaseComponentName }} = withInstall({{ camelCaseComponentName }})
+export default {{ pascalCaseComponentName }}
+export * from './src/{{ kebabCaseComponentName }}-props'

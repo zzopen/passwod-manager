@@ -1,0 +1,1 @@
+export const SECRET_CATEGORY_EVENT_CLICK_MENU_ITEM = 'secretCategoryEventClickMenuItem'

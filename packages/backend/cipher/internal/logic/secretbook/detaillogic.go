@@ -46,29 +46,35 @@ func (l *DetailLogic) Detail(req *types.SecretBookDetailReq) (resp *response.Api
 	}
 
 	secretBook, _ := l.svcCtx.SecretBookRepository.GetById(id)
-	logx.Info(secretBook)
 	if secretBook == nil || secretBook.IsDelete() {
 		return nil, response.FailWithMsg(response.SearchFailMsg())
 	}
 
 	res := &DetailResponseData{
-		Id:               tool.Uint64ToString(secretBook.Id),
-		Title:            secretBook.Title,
-		Website:          secretBook.Website,
-		Username:         secretBook.Username,
-		Password:         secretBook.Password,
-		Email:            secretBook.Email,
-		Mobile:           secretBook.Mobile,
-		Remark:           secretBook.Remark,
-		CreatedAt:        secretBook.CreatedAt.String(),
-		UpdatedAt:        secretBook.UpdatedAt.String(),
-		DataUpdatedAt:    secretBook.DataUpdatedAt.String(),
-		SecretCategoryId: tool.Uint64ToString(secretBook.SecretCategoryId),
+		Id:            tool.Uint64ToString(secretBook.Id),
+		Title:         secretBook.Title,
+		Website:       secretBook.Website,
+		Username:      secretBook.Username,
+		Password:      secretBook.Password,
+		Email:         secretBook.Email,
+		Mobile:        secretBook.Mobile,
+		Remark:        secretBook.Remark,
+		CreatedAt:     secretBook.CreatedAt.String(),
+		UpdatedAt:     secretBook.UpdatedAt.String(),
+		DataUpdatedAt: secretBook.DataUpdatedAt.String(),
 	}
 
-	secretCategory, _ := l.svcCtx.SecretCategoryRepository.GetById(id)
-	if secretCategory != nil {
-		res.SecretCategoryName = secretCategory.Name
+	if secretBook.SecretCategoryId > 0 {
+		secretCategory, _ := l.svcCtx.SecretCategoryRepository.GetById(secretBook.SecretCategoryId)
+		if secretCategory != nil {
+			if !secretCategory.IsDelete() {
+				res.SecretCategoryId = tool.Uint64ToString(secretCategory.Id)
+				res.SecretCategoryName = secretCategory.Name
+			}
+		}
+	} else {
+		res.SecretCategoryId = ""
+		res.SecretCategoryName = ""
 	}
 
 	return response.SuccessWithData(res), nil

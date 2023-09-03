@@ -10,7 +10,7 @@ help:
 		@echo "usage: make <option>"
 		@echo "options and effects:"
 		@echo "    help       : Show help"
-		@echo "    gen-model  : Generate gorm query"
+		@echo "    gen-query  : Generate gorm query"
 		@echo "    test       : Test"
 
 gen: gen-query

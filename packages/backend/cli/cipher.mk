@@ -79,7 +79,7 @@ fmt:
 
 ## 代码自动生成
 gen-api:
-		@cd $(CIPHER_PATH) && $(GO_CTL) api go -api ./api/cipher.api -dir .
+		@cd $(CIPHER_PATH) && $(GO_CTL) api go -api ./desc/cipher.api -dir .
 		@echo "Generate api success ..."
 
 ## run

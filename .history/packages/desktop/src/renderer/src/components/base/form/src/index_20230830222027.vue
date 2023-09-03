@@ -1,0 +1,26 @@
+<script lang="ts" setup>
+import { useNamespace } from '@renderer/components/_shared'
+import { formProps } from './props'
+
+defineOptions({ name: 'XlBaseForm', inheritAttrs: false })
+
+const { b } = useNamespace('form')
+const getClass = computed(() => {
+  return [b()]
+})
+
+const props = defineProps(formProps())
+const model = reactive({})
+</script>
+
+<template>
+  <div :class="getClass">
+    <a-form ref="formRef" :model="m1" :label-col="{ span: 8 }" :wrapper-col="{ span: 16 }">
+      <a-form-item v-for="(item, index1) in schemas" :key="index1" :label="item.label">
+        <template v-if="item.ele == 'input'">
+          <a-input v-model:value="props.m1" placeholder="请输入名称" style="width: 200px" />
+        </template>
+      </a-form-item>
+    </a-form>
+  </div>
+</template>

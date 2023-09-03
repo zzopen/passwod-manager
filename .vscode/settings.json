@@ -8,7 +8,8 @@
     "**/.idea": true,
     "**/dist": false,
     "**/.github": true,
-    "**/.history": true
+    "**/.history": true,
+    "**/backend": true
   },
   "tslint.enable": false,
   "prettier.enable": true,
@@ -28,8 +29,8 @@
   },
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
-    "source.fixAll.eslint": true,
-    "source.fixAll.stylelint": true
+    "source.fixAll.eslint": true
+    //"source.fixAll.stylelint": true
   },
   "css.lint.unknownAtRules": "ignore",
   "scss.lint.unknownAtRules": "ignore",
@@ -48,8 +49,5 @@
   },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   }
 }

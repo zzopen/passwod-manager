@@ -1,0 +1,1 @@
+import { emitter } from '../emitter'

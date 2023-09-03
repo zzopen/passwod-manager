@@ -7,6 +7,17 @@ type Reply struct {
 	Data interface{} `json:"data,omitempty"`
 }
 
+type PageReq struct {
+	Page  int64 `form:"page"  validate:"number,gte=1"  label:"页数"`
+	Limit int64 `form:"limit" validate:"number,gte=1"  label:"条数"`
+}
+
+type Pagination struct {
+	Page  int64 `json:"page"`
+	Limit int64 `json:"limit"`
+	Total int64 `json:"total"`
+}
+
 type JwtTokenRequest struct {
 }
 
@@ -44,11 +55,11 @@ type SecretBookUpdateReq struct {
 }
 
 type SecretBookDetailReq struct {
-	Id string `json:"id,optional" validate:"required" label:"ID"`
+	Id string `form:"id,optional" validate:"required" label:"ID"`
 }
 
 type SecretBookListReq struct {
-	SecretCategoryId string `json:"secret_category_id,optional"`
+	SecretCategoryId string `form:"secret_category_id,optional"`
 }
 
 type SecretCategoryCreateReq struct {
@@ -67,7 +78,7 @@ type SecretCategoryUpdateReq struct {
 }
 
 type SecretCategoryDetailReq struct {
-	Id string `json:"id,optional" validate:"required" label:"ID"`
+	Id string `form:"id,optional" validate:"required" label:"ID"`
 }
 
 type SecretCategoryListReq struct {

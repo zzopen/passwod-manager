@@ -62,7 +62,7 @@ func (repo *SecretBookRepository) DeleteById(id uint64, m map[string]any) error 
 
 	q := repo.SecretBook
 	tool.UpdateDelete(m)
-	_, err := q.WithContext(repo.ctx).Where(q.Id.Eq(id)).Delete()
+	_, err := q.WithContext(repo.ctx).Where(q.Id.Eq(id)).Updates(m)
 	if err != nil {
 		return err
 	}

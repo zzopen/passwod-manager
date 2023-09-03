@@ -1,0 +1,17 @@
+syntax = "v1"
+
+import (
+	// 公共
+	"common/common.api"
+
+	"jwt/jwt.api"
+	"example/example.api"
+	"secret-book/secret-book.api"
+	"secret-category/secret-category.api"
+)
+
+info(
+	author: "许磊"
+	date:   "2023-08-01"
+	desc:   "cipher-api"
+)
