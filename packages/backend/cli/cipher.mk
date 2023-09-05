@@ -7,7 +7,7 @@ CIPHER_PATH= $(ROOT_PATH)/cipher
 CIPHER_OUT_PATH = $(CURRENT_PATH)/cipher-out
 ETC_PATH = $(CIPHER_PATH)/etc
 
-BIN_NAME = pwd-manager
+BIN_NAME = cipher
 CIPHER_GO_FILE_NAME = cipher.go
 
 PRODUCT_CONF_FILE_NAME = cipher-api.yaml
@@ -51,19 +51,19 @@ build:
 		@echo "build success ..."
 
 windows:
-		GOOS=windows && \
+		GOOS=windows
 		@cd $(CIPHER_PATH) && $(GO_BUILD) -ldflags="-s -w" -o $(CIPHER_OUT_PATH)/$(WINDOWS_BIN_NAME) ./$(CIPHER_GO_FILE_NAME) && \
-		$(UPX)
+		$(WINDOWS_UPX)
 		@echo "windows success ..."
 
 linux:
-		GOOS=linux && \
+		GOOS=linux
 		@cd $(CIPHER_PATH) && $(GO_BUILD) -ldflags="-s -w" -o $(CIPHER_OUT_PATH)/$(LINUX_BIN_NAME) ./$(CIPHER_GO_FILE_NAME) && \
 		$(LINUX_UPX)
 		@echo "linux success ..."
 
 darwin:
-		GOOS=darwin && \
+		GOOS=darwin
 		@cd $(CIPHER_PATH) && $(GO_BUILD) -ldflags="-s -w" -o $(CIPHER_OUT_PATH)/$(DARWIN_BIN_NAME) ./$(CIPHER_GO_FILE_NAME) && \
 		$(DARWIN_UPX)
 		@echo "darwin success ..."

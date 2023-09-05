@@ -1,4 +1,4 @@
-Name: backend-api
+Name: cipher-api
 Host: 0.0.0.0
 Port: 7002
 Mode: dev
@@ -9,10 +9,10 @@ DevServer:
   Port: 7001
   HealthPath: /health
 Log:
-  ServiceName: backend-api
+  ServiceName: cipher-api
   Mode: file
   Encoding: json
-  Path: logs/backend-api/
+  Path: logs/cipher-api/
   TimeFormat: 2006-01-02 15:04:05
   Level: debug
 Auth:

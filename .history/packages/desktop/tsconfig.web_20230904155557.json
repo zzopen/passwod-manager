@@ -1,0 +1,22 @@
+{
+  "extends": "@electron-toolkit/tsconfig/tsconfig.web.json",
+  "include": [
+    "src/renderer/src/env.d.ts",
+    "src/renderer/src/**/*",
+    "src/renderer/src/**/*.vue",
+    "src/preload/**/*",
+    "src/common/**/*"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["lodash"],
+    "paths": {
+      "@renderer/*": ["src/renderer/src/*"],
+      "@preload/*": ["src/preload/*"],
+      "@common/*": ["src/common/*"]
+    }
+  }
+}

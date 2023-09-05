@@ -1,0 +1,43 @@
+syntax = "v1"
+
+info(
+  author: "许磊"
+  date:   "2023-07-23"
+  desc:   "账号模块"
+)
+
+type (
+  UserCreateReq {
+    Username string `json:"name,optional" validate:"required" label:"账号"`
+    Password string `json:"name,optional" validate:"required" label:"密码"`
+    Name string `json:"name,optional" validate:"required" label:"姓名"`
+  }
+
+  UserDeleteReq {
+    Id string `json:"id,optional" validate:"required" label:"ID"`
+  }
+
+  UserInfoReq {
+    Id string `form:"id,optional" validate:"required" label:"ID"`
+  }
+)
+
+@server (
+  group: user
+  prefix: user
+)
+
+service cipher-api {
+  @doc "创建用户"
+  @handler create
+  post /create (UserCreateReq) returns (Reply)
+
+  @doc "删除用户"
+  @handler delete
+  post /delete (UserDeleteReq) returns (Reply)
+
+
+  @doc "密码分类记录详情"
+  @handler info
+  get /info (UserInfoReq) returns (Reply)
+}
