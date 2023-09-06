@@ -1,4 +1,5 @@
-import { logger, portfinder } from '@main/shared'
+import { portfinder } from '@main/shared/deps'
+import { logger } from './log'
 
 export const getAvailablePorts = async (
   port: number,

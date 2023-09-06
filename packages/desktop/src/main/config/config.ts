@@ -11,7 +11,7 @@ import {
   getBackendLogDirPath,
   getDesktopDirPath,
   getDesktopLogDirPath
-} from './helper'
+} from '@main/shared'
 
 export interface Config {
   appDataPath: string
@@ -37,7 +37,7 @@ export interface Desktop {
   dirPath: string
   logDirPath?: string
 }
-
+console.log(444)
 export const defaultConfig: Config = {
   appDataPath: getAppDataPath(),
   appUserDataPath: getAppUserDataPath(),

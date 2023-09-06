@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { h, PlusOutlined, emitOpenCreateSecretCategoryModal } from '@renderer/shared'
-import type { ButtonProps, CSSProperties } from '@renderer/shared'
+import { h, PlusOutlined } from '@renderer/shared/deps'
+import type { ButtonProps, CSSProperties } from '@renderer/shared/deps'
+import { emitOpenCreateSecretCategoryModal } from '@renderer/shared'
 
 defineOptions({ name: 'SecretCategoryMenuAction', inheritAttrs: false })
 

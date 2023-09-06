@@ -1,4 +1,4 @@
-import { emitter } from '../../emitter'
+import { emitter } from '../emitter'
 import {
   EVENT_SEARCH_SECRET_BOOK_DETAIL,
   EVENT_OPEN_UPDATE_SECRET_BOOK_DRAWER,

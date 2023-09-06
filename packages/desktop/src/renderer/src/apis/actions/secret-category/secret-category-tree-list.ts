@@ -1,7 +1,8 @@
 import { req } from '@renderer/apis/instance'
+import { SettingOutlined, type ItemType } from '@renderer/shared/deps'
+import { getMenuItem } from '@renderer/shared'
 import { API_SECRET_CATEGORY_TREELIST } from './define'
 import { isEmptyArray } from '@common/shared'
-import { getMenuItem, SettingOutlined, type ItemType } from '@renderer/shared'
 import type { SecretCategorys, SecretCategory } from '@common/types'
 
 export interface ArpSecretCategoryTreeList {

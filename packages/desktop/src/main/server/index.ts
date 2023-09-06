@@ -1,5 +1,6 @@
-import { customExec, logger, ChildProcess } from '@main/shared'
-import { getBackendExecutePath, defaultConfig } from '@main/config'
+import { ChildProcess } from '@main/shared/deps'
+import { getBackendExecutePath, customExec, logger } from '@main/shared'
+import { defaultConfig } from '@main/config'
 
 let childProcess: ChildProcess | undefined
 

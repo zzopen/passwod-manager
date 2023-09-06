@@ -1,4 +1,6 @@
-import { spawn, ChildProcess, logger, isWin } from '@main/shared'
+import { spawn, ChildProcess } from '@main/shared/deps'
+import { logger } from './log'
+import { isWin } from './env'
 
 export const customExec = async (
   cmd: string,

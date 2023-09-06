@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from '@renderer/shared'
+import { createRouter, createWebHashHistory } from '@renderer/shared/deps'
 import { getRoutes } from './routes'
 
 const router = createRouter({

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-// import { onKeyDown, consoleLog } from '@renderer/shared'
+// import { onKeyDown } from '@renderer/shared/deps'
+// import { consoleLog } from '@renderer/shared'
 import SecretBookUpdateDrawer from '@renderer/views/_components/secret-book/update-secret-book-drawer'
 import CreateSecretCategoryModal from '@renderer/views/_components/secret-category/create-secret-category-modal'
 

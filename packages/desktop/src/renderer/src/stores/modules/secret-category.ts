@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { secretCategory } from '@renderer/apis'
-import type { ItemType } from '@renderer/shared'
+import type { ItemType } from '@renderer/shared/deps'
 import { buildDataOptions } from '@renderer/shared'
 import { useRequestStore } from './request'
 import type { SecretCategorys } from '@common/types'

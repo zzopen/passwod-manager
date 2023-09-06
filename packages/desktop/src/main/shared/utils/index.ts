@@ -1,8 +1,10 @@
+// 可能存在相互import，顺序很重要
 export * from './env'
-export * from './log'
-export * from './store'
 export * from './yaml'
+export * from './log'
 export * from './port'
-export * from './path'
 export * from './file'
+export * from './electron'
+export * from './store'
+export * from './path'
 export * from './exec'

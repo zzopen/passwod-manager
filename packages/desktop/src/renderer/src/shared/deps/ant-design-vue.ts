@@ -1,41 +1,17 @@
-import type { VueElement } from './vue'
-
 /**** ant-design-vue *****/
-import {
+export {
   MailOutlined,
   SearchOutlined,
   PlusOutlined,
   SettingOutlined,
   ExclamationCircleOutlined
 } from '@ant-design/icons-vue'
-export { MailOutlined, SearchOutlined, PlusOutlined, SettingOutlined, ExclamationCircleOutlined }
 
-import { Form, message, Modal } from 'ant-design-vue'
-export { Form, message, Modal }
+export { Form, message, Modal } from 'ant-design-vue'
 
-import type { MenuProps, ItemType, DrawerProps, SelectProps, ButtonProps } from 'ant-design-vue'
-import type { SelectValue } from 'ant-design-vue/es/select/index'
-export type { ButtonProps, MenuProps, ItemType, DrawerProps, SelectProps, SelectValue }
-import { type ThemeConfig } from 'ant-design-vue/es/config-provider/context'
-export type { ThemeConfig }
+export type { MenuProps, ItemType, DrawerProps, SelectProps, ButtonProps } from 'ant-design-vue'
+export type { SelectValue } from 'ant-design-vue/es/select/index'
 
-/**** ant-design-vue MenuItem *****/
-function getMenuItem(
-  label: VueElement | string,
-  key: string,
-  icon?: any,
-  children?: ItemType[],
-  title?: string,
-  type?: 'group'
-): ItemType {
-  return {
-    label,
-    key,
-    title,
-    icon,
-    children,
-    type
-  }
-}
+export { type ThemeConfig } from 'ant-design-vue/es/config-provider/context'
 
-export { getMenuItem }
+export type { MessageInstance } from 'ant-design-vue/es/message/interface'

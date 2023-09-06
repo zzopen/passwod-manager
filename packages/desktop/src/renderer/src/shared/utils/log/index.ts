@@ -1,5 +1,5 @@
 import { now } from '@common/shared'
-import { isDevMode } from '../../env'
+import { isDevMode } from '../env'
 import chalk from 'chalk'
 
 function consoleLog(scope = 'log', ...msgs: any[]) {

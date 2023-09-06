@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useCssVar } from '@renderer/shared'
-import type { ThemeConfig, MenuProps, CSSProperties, ItemType } from '@renderer/shared'
+import type { ThemeConfig, MenuProps, CSSProperties, ItemType } from '@renderer/shared/deps'
 import { emitLoadSecretBookList, listenerLoadSecretCategoryMenuList } from '@renderer/shared'
 import { useSecretCategoryStore } from '@renderer/stores'
 

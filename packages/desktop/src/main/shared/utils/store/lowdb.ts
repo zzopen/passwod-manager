@@ -1,5 +1,5 @@
-import { defaultConfig } from '@main/config'
 import { now } from '@common/shared'
+import { defaultConfig } from '@main/config'
 import { JSONFile } from 'lowdb/node'
 
 export interface UserInfo {

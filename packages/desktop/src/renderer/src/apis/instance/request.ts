@@ -7,8 +7,7 @@ import axios, {
 import type { ApiResult, RequestOption, ApiDescription, ApiResponse } from './types'
 import { isSuccess, isFail, NETWORK_ERROR_MSG } from './response'
 import { delay } from '@common/shared'
-import { consoleLog } from '@renderer/shared'
-import { useStaticMessage, type MessageStaticInstance } from '@renderer/shared/hooks'
+import { consoleLog, useStaticMessage, type MessageStaticInstance } from '@renderer/shared'
 
 export class AxiosRequest {
   instance: AxiosInstance

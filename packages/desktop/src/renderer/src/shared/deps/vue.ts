@@ -1,6 +1,4 @@
 /**** vue *****/
-import { h, VueElement } from 'vue'
-export { h, VueElement }
+export { h, VueElement } from 'vue'
 
-import type { CSSProperties } from 'vue'
-export type { CSSProperties }
+export type { CSSProperties } from 'vue'

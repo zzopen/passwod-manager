@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useCssVar } from '@renderer/shared'
-import type { ThemeConfig, MenuProps, ItemType, CSSProperties } from '@renderer/shared'
+import type { ThemeConfig, MenuProps, ItemType, CSSProperties } from '@renderer/shared/deps'
 import { useSecretCategoryStore } from '@renderer/stores'
 
 defineOptions({ name: 'SecretCategoryTreeMenu', inheritAttrs: false })

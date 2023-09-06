@@ -1,15 +1,16 @@
 import {
   app,
   Menu,
+  shell,
+  BrowserWindow,
+  globalShortcut,
   nodePath,
   nodeProcess,
   is,
-  nativeImage,
-  isLinux,
-  isMac,
-  isWin
-} from '@main/shared'
-import { shell, BrowserWindow, globalShortcut } from 'electron'
+  nativeImage
+} from '@main/shared/deps'
+import { isLinux, isMac, isWin } from '@main/shared'
+
 import cipherIco from './icon.png?asset'
 import type { Nullable } from '@common/types'
 

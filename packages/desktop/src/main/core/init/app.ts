@@ -1,4 +1,5 @@
-import { logger, appQuit, isMac, app, BrowserWindow, electronApp, optimizer } from '@main/shared'
+import { app, BrowserWindow, electronApp, optimizer } from '@main/shared/deps'
+import { logger, appQuit, isMac } from '@main/shared'
 import { getMainWindow, createMainWindow } from '@main/core/wins'
 import { stopServer } from '@main/server'
 

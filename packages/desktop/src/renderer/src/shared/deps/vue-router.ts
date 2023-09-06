@@ -1,5 +1,3 @@
-import { type RouteRecordRaw } from 'vue-router'
-export type { RouteRecordRaw }
+export type { RouteRecordRaw } from 'vue-router'
 
-import { createRouter, createWebHashHistory } from 'vue-router'
-export { createRouter, createWebHashHistory }
+export { createRouter, createWebHashHistory } from 'vue-router'

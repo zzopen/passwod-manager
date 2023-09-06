@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from '@renderer/shared'
+import type { RouteRecordRaw } from '@renderer/shared/deps'
 
 export interface Route {
   name: string

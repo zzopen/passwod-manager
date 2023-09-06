@@ -1,4 +1,5 @@
-import { logger, getAvailablePorts, fse, writeToYaml, appQuit } from '@main/shared'
+import { fse } from '@main/shared/deps'
+import { logger, getAvailablePorts, writeToYaml, appQuit } from '@main/shared'
 import { defaultConfig, defaultBackendConfig } from '@main/config'
 
 async function init() {

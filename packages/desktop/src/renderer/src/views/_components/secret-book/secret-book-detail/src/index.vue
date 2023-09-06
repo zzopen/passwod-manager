@@ -3,14 +3,12 @@ import { useSecretBookStore, useRequestStore } from '@renderer/stores'
 import type { DataSource } from './props'
 import { defaultDataSource } from './props'
 import EmptyState from '@renderer/views/_components/empty-state'
+import { message, Modal, ExclamationCircleOutlined } from '@renderer/shared/deps'
 import {
   listenerSearchSecretBookDetail,
   listenerLoadSecretBookList,
   emitLoadSecretBookList,
-  emitOpenUpdateSecretBookDrawer,
-  message,
-  Modal,
-  ExclamationCircleOutlined
+  emitOpenUpdateSecretBookDrawer
 } from '@renderer/shared'
 
 defineOptions({ name: 'SecretBookDetail', inheritAttrs: false })

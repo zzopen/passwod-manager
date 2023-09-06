@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { createSecretCategoryFormProps } from './props'
-import { Form, useVModel } from '@renderer/shared'
+import { Form, useVModel } from '@renderer/shared/deps'
 import { useRequestStore, useSecretCategoryStore } from '@renderer/stores'
 import type { ArpCreateSecretCategory } from '@renderer/apis'
 

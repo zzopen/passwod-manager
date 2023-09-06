@@ -1,5 +1,4 @@
-import { message } from 'ant-design-vue'
-import type { MessageInstance } from 'ant-design-vue/es/message/interface'
+import { message, type MessageInstance } from '@renderer/shared/deps'
 
 message.config({
   top: `10px`,

@@ -5,14 +5,13 @@ import {
   type DataSource
 } from '@renderer/views/_components/secret-book/update-secret-book-form'
 
+import { message } from '@renderer/shared/deps'
 import {
-  message,
   listenerOpenUpdateSecretBookDrawer,
   emitLoadSecretBookList,
   emitSearchSecretBookDetail
 } from '@renderer/shared'
-
-import { lodashFn } from '@common/shared'
+import { lodashFn } from '@common/shared/deps'
 
 defineOptions({ name: 'UpdateSecretBookDrawer', inheritAttrs: false })
 

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { updateSecretBookFormProps } from './props'
 import { useSecretCategoryStore, useRequestStore } from '@renderer/stores'
-import { Form, useVModel } from '@renderer/shared'
-import { lodashFn } from '@common/shared'
+import { Form, useVModel } from '@renderer/shared/deps'
+import { lodashFn } from '@common/shared/deps'
 import type { ArpUpdateSecretBook } from '@renderer/apis'
 
 defineOptions({ name: 'UpdateSecretBookForm', inheritAttrs: false })

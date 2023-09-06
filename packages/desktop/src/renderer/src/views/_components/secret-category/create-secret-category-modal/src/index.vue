@@ -1,6 +1,6 @@
 <script lang="ts" setup>
+import { message } from '@renderer/shared/deps'
 import {
-  message,
   listenerOpenCreateSecretCategoryModal,
   emitLoadSecretCategoryMenuList
 } from '@renderer/shared'

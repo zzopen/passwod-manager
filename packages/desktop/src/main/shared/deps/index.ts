@@ -12,7 +12,7 @@ export { YAML }
 import portfinder from 'portfinder'
 export { portfinder }
 
-export { nativeImage, app, BrowserWindow, ipcMain, Menu } from 'electron'
+export { nativeImage, app, BrowserWindow, ipcMain, Menu, shell, globalShortcut } from 'electron'
 
 // import ElectronStore from 'electron-store'
 // export { ElectronStore }

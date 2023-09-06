@@ -1,4 +1,5 @@
-import { fse, logger } from '@main/shared'
+import { fse } from '@main/shared/deps'
+import { logger } from './log'
 
 export const isExecutable = async (_path: string): Promise<boolean> => {
   if (!_path) {

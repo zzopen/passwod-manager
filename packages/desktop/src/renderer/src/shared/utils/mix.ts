@@ -1,4 +1,24 @@
 import type { SelectOptions, SelectOption } from '@common/types'
+import type { VueElement, ItemType } from '@renderer/shared/deps'
+
+/**** ant-design-vue MenuItem *****/
+export function getMenuItem(
+  label: VueElement | string,
+  key: string,
+  icon?: any,
+  children?: ItemType[],
+  title?: string,
+  type?: 'group'
+): ItemType {
+  return {
+    label,
+    key,
+    title,
+    icon,
+    children,
+    type
+  }
+}
 
 export function buildDataOptions(data: any[], labelKey = 'name', valueKey = 'id'): SelectOptions {
   if (!data || data.length <= 0) {
