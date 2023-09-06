@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useSecretBookStore } from '@renderer/stores'
 import {
+  UpdateSecretBookForm,
   defaultDataSource,
   type DataSource
 } from '@renderer/views/_components/secret-book/update-secret-book-form'
@@ -74,7 +75,7 @@ listenerOpenUpdateSecretBookDrawer(ready)
 <template>
   <div>
     <xl-base-drawer v-model:open="state.openDrawer" :title="state.dataSource.title">
-      <secret-book-update-form v-model:dataSource="state.dataSource" @success="onSuccess" />
+      <update-secret-book-form v-model:dataSource="state.dataSource" @success="onSuccess" />
     </xl-base-drawer>
   </div>
 </template>

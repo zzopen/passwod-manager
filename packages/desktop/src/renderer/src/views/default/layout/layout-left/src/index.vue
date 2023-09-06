@@ -33,7 +33,7 @@ const layoutSiderProps = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.layout-left {
+.#{$b-ns}-layout-left {
   height: '100%';
   color: v-bind('layoutLeftColor');
   background-color: v-bind('layoutLeftBgColor');

@@ -1,5 +1,5 @@
 import { logger } from '@main/shared'
-import { createMainWindow } from '@main/core/wins/main-win'
+import { createMainWindow } from '../wins/main-win'
 
 async function init() {
   logger.info('start', 'init-renderer')

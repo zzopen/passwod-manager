@@ -12,7 +12,7 @@ import { consoleLog, useStaticMessage, type MessageStaticInstance } from '@rende
 export class AxiosRequest {
   instance: AxiosInstance
   baseConfig: AxiosRequestConfig = {
-    baseURL: 'http://localhost:7002',
+    baseURL: 'http://localhost:50000',
     timeout: 100000,
     withCredentials: false,
     headers: {

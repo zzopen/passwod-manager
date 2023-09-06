@@ -1,4 +1,4 @@
-import { startApp } from '@main/core/app'
+import { startApp } from './core/app'
 
 startApp()
 // import './test-index'

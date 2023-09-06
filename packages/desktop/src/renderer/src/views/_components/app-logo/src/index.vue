@@ -3,7 +3,7 @@ import { useNamespace, useCssVar } from '@renderer/shared'
 
 defineOptions({ name: 'AppLogo', inheritAttrs: false })
 
-const { b, m } = useNamespace('app-logo')
+const { b, e } = useNamespace('app-logo')
 const { appLogoHeight, appLogoImgWidth, appLogoImgHeight } = useCssVar()
 const getClass = computed(() => {
   return [b()]
@@ -11,7 +11,7 @@ const getClass = computed(() => {
 
 const logoTitle = ref('ZZ Cipher')
 const logoUrl = 'src/assets/music.png'
-const titleClass = [`${m('title')}`]
+const titleClass = [`${e('title')}`]
 </script>
 
 <template>
@@ -22,7 +22,7 @@ const titleClass = [`${m('title')}`]
 </template>
 
 <style lang="scss" scope>
-.app-logo {
+.#{$b-ns}-app-logo {
   display: flex;
   align-items: center;
   height: v-bind('appLogoHeight');

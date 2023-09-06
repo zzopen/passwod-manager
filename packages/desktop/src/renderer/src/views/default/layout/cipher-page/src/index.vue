@@ -21,7 +21,7 @@ const getClass = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.cipher-page {
+.#{$b-ns}-cipher-page {
   width: 100%;
   height: 100%;
 }

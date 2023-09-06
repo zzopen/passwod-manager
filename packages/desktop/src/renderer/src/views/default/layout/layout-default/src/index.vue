@@ -23,7 +23,7 @@ const getClass = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.layout-default {
+.#{$b-ns}-layout-default {
   width: 100%;
   height: 100%;
 }

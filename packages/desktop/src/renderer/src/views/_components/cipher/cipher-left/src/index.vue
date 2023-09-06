@@ -30,7 +30,7 @@ const siderProps = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.cipher-left {
+.#{$b-ns}-cipher-left {
   height: '100%';
   background-color: v-bind('cipherLeftBgColor');
 }
