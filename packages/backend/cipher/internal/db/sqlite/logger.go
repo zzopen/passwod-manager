@@ -13,7 +13,7 @@ import (
 func NewDbLogger(conf config.Config) logger.Interface {
 	// db log name
 	suffix := tool.NowDateStr()
-	file, err := os.Create(conf.Log.Path + "sql.log" + "-" + suffix)
+	file, err := os.Create(conf.Log.Path + "/" + "sql." + suffix + ".log")
 	if err != nil {
 		panic(err)
 	}
