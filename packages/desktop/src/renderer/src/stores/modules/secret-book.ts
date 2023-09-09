@@ -6,11 +6,13 @@ import type { Nullable, SecretBook, SecretBooks } from '@common/types'
 export interface SetcretBookState {
   apiSecretBook: Nullable<SecretBook>
   apiSecretBookList: SecretBooks
+  secretBookSearch: ArpGetSecretBookList
 }
 
 const defaultState: SetcretBookState = {
   apiSecretBook: null,
-  apiSecretBookList: []
+  apiSecretBookList: [],
+  secretBookSearch: {}
 }
 
 export const useSecretBookStore = defineStore({
@@ -35,10 +37,14 @@ export const useSecretBookStore = defineStore({
     resetApiSecretBook() {
       this.apiSecretBook = defaultState.apiSecretBook
     },
+    resetSecretBookSearch() {
+      this.secretBookSearch = defaultState.secretBookSearch
+    },
     reset() {
       this.$patch((state) => {
         state.apiSecretBookList = defaultState.apiSecretBookList
         state.apiSecretBook = defaultState.apiSecretBook
+        state.secretBookSearch = defaultState.secretBookSearch
       })
     }
   }

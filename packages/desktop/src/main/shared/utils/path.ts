@@ -1,79 +1,76 @@
 import { nodePath } from '@main/shared/deps'
 import { isMac, isDev, isProd, isLinux, isWin } from './env'
 import { getAppHomeDirPath, getAppExeDirPath } from './electron'
-import {
-  LOCAL_DATA_DIR_NAME,
-  DB_DIR_NAME,
-  BACKEND_CONF_FILE_NAME,
-  DB_FILE_NAME,
-  BACKEND_DIR_NAME,
-  BACKEND_LOG_DIR_NAME,
-  DESKTOP_DIR_NAME,
-  DESKTOP_LOG_DIR_NAME
-} from '@main/config/constant'
+import * as constant from '@main/config/constant'
+import { getAvailablePorts } from './port'
+import { BUILD_SERVER_DIR_NAME } from '@main/config'
 
-export const getDesktopDirAbsPath = (): string => {
-  return nodePath.resolve(__dirname, '../../')
+export const getPackagesDirPath = (): string => {
+  return nodePath.resolve(__dirname, '../../../')
+}
+
+export const getDesktopProjectDirPath = (): string => {
+  return nodePath.resolve(getPackagesDirPath(), `./${constant.DESKTOP_PROJECT_DIR_NAME}`)
+}
+
+export const getServerProjectDirPath = (): string => {
+  return nodePath.resolve(getPackagesDirPath(), `./${constant.SERVER_PROJECT_DIR_NAME}`)
 }
 
 export const getMainDirAbsPath = (): string => {
-  return nodePath.resolve(getDesktopDirAbsPath(), '../main')
+  return nodePath.resolve(getDesktopProjectDirPath(), `./src/main`)
 }
 
-export const getBackendDirAbsPath = (): string => {
-  return nodePath.resolve(getDesktopDirAbsPath(), '../backend')
+export const getResourcesDirAbsPath = (): string => {
+  return nodePath.resolve(getDesktopProjectDirPath(), './resources')
 }
 
-/**** 自定义存储路径 ****/
+/**** 用户数据自定义存储路径 ****/
 export const getLocalDataDirPath = (): string => {
-  let rootDirPath = '/'
+  let rootPath = '/'
   if (isDev) {
-    rootDirPath = getDesktopDirAbsPath()
+    rootPath = getDesktopProjectDirPath()
   } else if (isProd) {
     if (isMac || isLinux) {
-      rootDirPath = getAppHomeDirPath()
+      rootPath = getAppHomeDirPath()
     } else if (isWin) {
-      rootDirPath = getAppExeDirPath()
+      rootPath = getAppExeDirPath()
     }
   }
 
-  const dataDirPath = `${rootDirPath}/${LOCAL_DATA_DIR_NAME}`
+  const dataDirPath = `${rootPath}/${constant.LOCAL_DATA_DIR_NAME}`
   return nodePath.resolve(dataDirPath)
 }
 
-export const getBackendDirPath = (): string => {
-  return `${getLocalDataDirPath()}/${BACKEND_DIR_NAME}`
+export const getLdServerDirPath = (): string => {
+  return `${getLocalDataDirPath()}/${constant.LD_SERVER_DIR_NAME}`
 }
 
-export const getDbDirPath = (): string => {
-  return `${getBackendDirPath()}/${DB_DIR_NAME}`
+export const getLdServerDbDirPath = (): string => {
+  return `${getLdServerDirPath()}/${constant.LD_SERVER_DB_DIR_NAME}`
 }
 
-export const getDbFilePath = (): string => {
-  return `${getDbDirPath()}/${DB_FILE_NAME}`
+export const getLdServerDbFilePath = (): string => {
+  return `${getLdServerDbDirPath()}/${constant.LD_SERVER_DB_FILE_NAME}`
 }
 
-export const getBackendConfFilePath = (): string => {
-  return `${getBackendDirPath()}/${BACKEND_CONF_FILE_NAME}`
+export const getLdServerConfFilePath = (): string => {
+  return `${getLdServerDirPath()}/${constant.LD_SERVER_CONF_FILE_NAME}`
 }
 
-export const getBackendLogDirPath = (): string => {
-  return `${getBackendDirPath()}/${BACKEND_LOG_DIR_NAME}`
+export const getLdServerLogDirPath = (): string => {
+  return `${getLdServerDirPath()}/${constant.LD_SERVER_LOG_DIR_NAME}`
 }
 
-export const getBackendOutDirAbsPath = (): string => {
-  return nodePath.resolve(getBackendDirAbsPath(), 'cli/cipher-out')
+export const getLdDesktopDirPath = (): string => {
+  return `${getLocalDataDirPath()}/${constant.LD_DESKTOP_DIR_NAME}`
 }
 
-export const getDesktopDirPath = (): string => {
-  return `${getLocalDataDirPath()}/${DESKTOP_DIR_NAME}`
+export const getLdDesktopLogDirPath = (): string => {
+  return `${getLdDesktopDirPath()}/${constant.LD_DESKTOP_LOG_DIR_NAME}`
 }
 
-export const getDesktopLogDirPath = (): string => {
-  return `${getDesktopDirPath()}/${DESKTOP_LOG_DIR_NAME}`
-}
-
-export const getBackendExecutePath = (): string => {
+export const getServerExecuteableFileName = (): string => {
   let binName = ''
   if (isMac) {
     binName = 'cipher-darwin'
@@ -85,5 +82,38 @@ export const getBackendExecutePath = (): string => {
     return ''
   }
 
-  return nodePath.resolve(getBackendOutDirAbsPath(), binName)
+  return binName
+}
+
+export const getServerExecuteableDirPath = (): string => {
+  if (isDev) {
+    return getResourcesDirAbsPath()
+  }
+
+  if (isMac) {
+    return nodePath.resolve(getAppExeDirPath(), `../${BUILD_SERVER_DIR_NAME}`)
+  }
+
+  return `${getAppExeDirPath()}/${BUILD_SERVER_DIR_NAME}`
+}
+
+export const getServerExecuteableFilePath = (): string => {
+  return nodePath.resolve(getServerExecuteableDirPath(), getServerExecuteableFileName())
+}
+
+export const getServerPort = async () => {
+  if (isDev) {
+    return [50000]
+  }
+
+  const ports = await getAvailablePorts(50000, 50100, 2)
+  if (ports.length === 0) {
+    throw new Error('无可用端口')
+  }
+
+  return ports
+}
+
+export const getServerBaseUrl = (port: number) => {
+  return `http://127.0.0.1:${port}`
 }

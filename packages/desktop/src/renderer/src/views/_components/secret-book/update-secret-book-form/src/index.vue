@@ -4,6 +4,7 @@ import { useSecretCategoryStore, useRequestStore } from '@renderer/stores'
 import { Form, useVModel } from '@renderer/shared/deps'
 import { lodashFn } from '@common/shared/deps'
 import type { ArpUpdateSecretBook } from '@renderer/apis'
+import { consoleLog } from '@renderer/shared'
 
 defineOptions({ name: 'UpdateSecretBookForm', inheritAttrs: false })
 
@@ -23,7 +24,7 @@ const dataSourceRef = useVModel(props, 'dataSource', emits, {
 })
 
 const rulesRef = reactive({
-  title: [{ required: false, message: '请输入标题' }],
+  title: [{ required: true, message: '请输入标题' }],
   website: [{ required: true, message: '请输入网址' }],
   username: [{ required: true, message: '请输入账号' }],
   password: [{ required: true, message: '请输入密码' }],
@@ -43,7 +44,7 @@ const onSubmit = async () => {
     emits('success')
     return true
   } catch (error) {
-    console.log('submit error:', error)
+    consoleLog('submit error:', error)
     return false
   }
 }
@@ -90,7 +91,7 @@ const submitForm = async () => {
         />
       </a-form-item>
       <a-form-item label="密码" v-bind="validateInfos.password">
-        <a-input
+        <a-input-password
           v-model:value="dataSourceRef.password"
           placeholder="请输入名称"
           style="width: 200px"

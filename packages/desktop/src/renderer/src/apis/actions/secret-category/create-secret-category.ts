@@ -8,7 +8,7 @@ export interface ArpCreateSecretCategory {
 
 export const createSecretCategoryAction = async (p: ArpCreateSecretCategory): Promise<boolean> => {
   const apiDescription = Object.assign({}, API_CREATE_SECRET_CATEGORY)
-  const { mark } = await req.request(apiDescription, { data: p })
+  const { mark } = await req!.request(apiDescription, { data: p })
   if (!mark) {
     return false
   }

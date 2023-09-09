@@ -7,7 +7,7 @@
     "**/node_modules": true,
     "**/.idea": true,
     "**/dist": false,
-    "**/.github": true,
+    "**/.github": false,
     "**/.history": true,
     "**/backend": false
   },

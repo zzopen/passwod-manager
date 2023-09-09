@@ -12,7 +12,7 @@ import { consoleLog, useStaticMessage, type MessageStaticInstance } from '@rende
 export class AxiosRequest {
   instance: AxiosInstance
   baseConfig: AxiosRequestConfig = {
-    baseURL: 'http://localhost:50000',
+    baseURL: '',
     timeout: 100000,
     withCredentials: false,
     headers: {
@@ -28,7 +28,7 @@ export class AxiosRequest {
     this.initInterceptors()
   }
 
-  private initInterceptors() {
+  private async initInterceptors() {
     this.setRequestInterceptor()
     this.setResponseInterceptor()
   }
@@ -61,7 +61,6 @@ export class AxiosRequest {
       (error: any) => {
         let message = ''
         const status = error.response?.status
-        console.log('error:', error)
         switch (status) {
           case 400:
             message = '请求错误(400)'

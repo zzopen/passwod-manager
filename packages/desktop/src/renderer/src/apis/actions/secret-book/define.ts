@@ -21,6 +21,16 @@ const API_SECRET_BOOK_DETAIL: ApiDescription = {
 
 export { URL_SECRET_BOOK_DETAIL, API_SECRET_BOOK_DETAIL }
 
+// /secretbook/create
+const URL_CREATE_SECRET_BOOK = '/secretbook/create'
+const API_CREATE_SECRET_BOOK: ApiDescription = {
+  desc: '创建密码记录',
+  url: URL_CREATE_SECRET_BOOK,
+  method: METHOD.POST
+}
+
+export { URL_CREATE_SECRET_BOOK, API_CREATE_SECRET_BOOK }
+
 // /secretbook/update
 const URL_UPDATE_SECRET_BOOK = '/secretbook/update'
 const API_UPDATE_SECRET_BOOK: ApiDescription = {

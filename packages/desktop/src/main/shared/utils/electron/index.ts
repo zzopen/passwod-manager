@@ -4,6 +4,14 @@ export const appQuit = async () => {
   app.quit()
 }
 
+export const appExit = async () => {
+  app.exit()
+}
+
+export const getAppPath = (): string => {
+  return app.getAppPath()
+}
+
 export const getAppDataPath = (): string => {
   return app.getPath('appData')
 }

@@ -1,34 +1,27 @@
 <script lang="ts" setup>
-import { h, PlusOutlined } from '@renderer/shared/deps'
-import type { ButtonProps, CSSProperties } from '@renderer/shared/deps'
-import { emitOpenCreateSecretCategoryModal } from '@renderer/shared'
-
 defineOptions({ name: 'SecretCategoryMenuAction', inheritAttrs: false })
 
-const btnStyles: CSSProperties = {
-  width: '20px',
-  height: '20px'
-}
+// const btnStyles: CSSProperties = {
+//   width: '20px',
+//   height: '20px'
+// }
 
-const buttonProps = computed((): ButtonProps => {
-  return {
-    type: 'primary',
-    size: 'small',
-    shape: 'default',
-    icon: h(PlusOutlined)
-  }
-})
-const onClick = () => {
-  emitOpenCreateSecretCategoryModal()
-}
+// const buttonProps = computed((): ButtonProps => {
+//   return {
+//     type: 'primary',
+//     size: 'small',
+//     shape: 'default',
+//     icon: h(PlusOutlined)
+//   }
+// })
 </script>
 
 <template>
   <div class="secret-category-menu-action">
-    <div><span>分类</span></div>
-    <div>
+    <div><span>类别</span></div>
+    <!-- <div>
       <a-button :style="btnStyles" v-bind="buttonProps" @click="onClick" />
-    </div>
+    </div> -->
   </div>
 </template>
 

@@ -1,8 +1,9 @@
 <script lang="ts" setup>
 // import { onKeyDown } from '@renderer/shared/deps'
 // import { consoleLog } from '@renderer/shared'
-import SecretBookUpdateDrawer from '@renderer/views/_components/secret-book/update-secret-book-drawer'
+import UpdateSecretBookDrawer from '@renderer/views/_components/secret-book/update-secret-book-drawer'
 import CreateSecretCategoryModal from '@renderer/views/_components/secret-category/create-secret-category-modal'
+import CreateSecretBookDrawer from '@renderer/views/_components/secret-book/create-secret-book-drawer'
 
 defineOptions({ name: 'CustomTeleport', inheritAttrs: false })
 
@@ -17,7 +18,8 @@ defineOptions({ name: 'CustomTeleport', inheritAttrs: false })
 
 <template>
   <Teleport to="body">
-    <secret-book-update-drawer />
+    <update-secret-book-drawer />
+    <create-secret-book-drawer />
     <create-secret-category-modal />
   </Teleport>
 </template>

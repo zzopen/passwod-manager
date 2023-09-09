@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useNamespace, useCssVar } from '@renderer/shared'
+import { LOGO_TITLE } from '@common/config'
 
 defineOptions({ name: 'AppLogo', inheritAttrs: false })
 
@@ -9,34 +10,40 @@ const getClass = computed(() => {
   return [b()]
 })
 
-const logoTitle = ref('ZZ Cipher')
-const logoUrl = 'src/assets/music.png'
+const logoTitle = ref(LOGO_TITLE)
+const logoUrl = '/logo.png'
 const titleClass = [`${e('title')}`]
+const imgClass = [`${e('img')}`]
 </script>
 
 <template>
-  <div :class="getClass">
-    <img :src="logoUrl" alt="logo" />
-    <div :class="titleClass">{{ logoTitle }}</div>
-  </div>
+  <a-row :class="getClass" align="middle">
+    <a-col class="col1">
+      <img :class="imgClass" :src="logoUrl" alt="logo" />
+    </a-col>
+    <a-col class="col2" flex="auto">
+      <div :class="titleClass">{{ logoTitle }}</div>
+    </a-col>
+  </a-row>
 </template>
 
 <style lang="scss" scope>
 .#{$b-ns}-app-logo {
-  display: flex;
-  align-items: center;
   height: v-bind('appLogoHeight');
   cursor: pointer;
   transition: all 0.2s ease;
 
-  & img {
+  & .col1 {
+    padding-left: 15px;
+  }
+
+  & .col2 {
+    padding-left: 15px;
+  }
+
+  & __img {
     width: v-bind('appLogoImgWidth');
     height: v-bind('appLogoImgHeight');
-    margin: 10px;
-    display: inline-block;
-    height: 32px;
-    vertical-align: middle;
-    transition: height 0.2s;
   }
 
   &__title {

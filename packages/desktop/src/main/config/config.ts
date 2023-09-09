@@ -3,14 +3,15 @@ import {
   getAppUserDataPath,
   getAppExeDirPath,
   getLocalDataDirPath,
-  getBackendDirPath,
-  getDbDirPath,
-  getBackendConfFilePath,
+  getLdServerDirPath,
+  getLdServerDbDirPath,
+  getLdServerConfFilePath,
   getAppHomeDirPath,
-  getDbFilePath,
-  getBackendLogDirPath,
-  getDesktopDirPath,
-  getDesktopLogDirPath
+  getLdServerDbFilePath,
+  getLdServerLogDirPath,
+  getLdDesktopDirPath,
+  getLdDesktopLogDirPath,
+  isDev
 } from '@main/shared'
 
 export interface Config {
@@ -19,18 +20,26 @@ export interface Config {
   appExeDirPath: string
   appHomeDirPath: string
   dataDirPath: string
-  backend: Backend
+  appWillQuit: boolean
+  openDevTools: boolean
+  server: Server
   desktop: Desktop
 }
 
-export interface Backend {
+export interface Server {
   dirPath: string
   dbDirPath: string
   dbFilePath: string
   confFilePath: string
   logDirPath?: string
+  callLocal: boolean
+  callBinary: boolean
+  executableFileName?: string
+  executableFilePath?: string
+  host: string
   port?: number
   pid?: number
+  baseUrl: string
 }
 
 export interface Desktop {
@@ -47,16 +56,30 @@ export const initDefaultConfig = async () => {
     appExeDirPath: getAppExeDirPath(),
     appHomeDirPath: getAppHomeDirPath(),
     dataDirPath: getLocalDataDirPath(),
+    appWillQuit: false,
+    openDevTools: false,
     desktop: {
-      dirPath: getDesktopDirPath(),
-      logDirPath: getDesktopLogDirPath()
+      dirPath: getLdDesktopDirPath(),
+      logDirPath: getLdDesktopLogDirPath()
     },
-    backend: {
-      dirPath: getBackendDirPath(),
-      dbDirPath: getDbDirPath(),
-      dbFilePath: getDbFilePath(),
-      confFilePath: getBackendConfFilePath(),
-      logDirPath: getBackendLogDirPath()
+    server: {
+      host: '0.0.0.0',
+      baseUrl: '',
+      port: 50000,
+      dirPath: getLdServerDirPath(),
+      dbDirPath: getLdServerDbDirPath(),
+      dbFilePath: getLdServerDbFilePath(),
+      confFilePath: getLdServerConfFilePath(),
+      logDirPath: getLdServerLogDirPath(),
+      executableFileName: '',
+      executableFilePath: '',
+      callBinary: true,
+      callLocal: false
     }
+  }
+
+  if (isDev) {
+    defaultConfig.server.callLocal = true
+    defaultConfig.server.callBinary = false
   }
 }

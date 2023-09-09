@@ -1,6 +1,7 @@
 import log4js, { type Appender, type Log4js, type Logger } from 'log4js'
 import { defaultConfig } from '@main/config'
 import { isDev } from '../env'
+import { now } from '@common/shared'
 
 // 参考: https://blog.csdn.net/weixin_42214717/article/details/128332445
 
@@ -28,7 +29,7 @@ export const initLogger = async () => {
     pattern: 'yyyy-MM-dd.log',
     layout: {
       type: 'pattern',
-      parttern: jsonPattern
+      pattern: jsonPattern
     },
     keepFileExt: true,
     alwaysIncludePattern: true,
@@ -61,11 +62,21 @@ export const initLogger = async () => {
 }
 
 const formatter = (msg: any[] | any, scope: string) => {
+  let content = ''
+  let consoleContent: any[] = [now()]
   if (!Array.isArray(msg)) {
-    return `[${scope}] ${msg}`
+    content = `[${scope}] ${msg}`
+    consoleContent = [...consoleContent, `[${scope}]`, msg]
+  } else {
+    content = `[${scope}] ${msg.join(' ')}`
+    consoleContent = [...consoleContent, `[${scope}]`, ...msg]
   }
 
-  return `[${scope}] ${msg.join(' ')}`
+  if (isDev) {
+    console.log(...consoleContent)
+  }
+
+  return content
 }
 
 const info = (_logger: Logger, msg: any[] | any, scope: string) => {
@@ -88,8 +99,6 @@ const fatal = (_logger: Logger, msg: any[] | any, scope: string) => {
   _logger?.fatal(formatter(msg, scope))
 }
 
-// 1.error和info输出到不同的文件
-// 2.控制台输出
 export const logger = {
   debug: (msg: any[] | any, scope = 'default') => {
     debug(_defaultLogger, msg, scope)
@@ -105,33 +114,5 @@ export const logger = {
   },
   fatal: (msg: any[] | any, scope = 'default') => {
     fatal(_errorLogger, msg, scope)
-  }
-}
-
-export const consoleLogger = {
-  debug: (msg: any[] | any, scope = 'default') => {
-    if (isDev) {
-      debug(_consoleLogger, msg, scope)
-    }
-  },
-  info: (msg: any[] | any, scope = 'default') => {
-    if (isDev) {
-      info(_consoleLogger, msg, scope)
-    }
-  },
-  warn: (msg: any[] | any, scope = 'default') => {
-    if (isDev) {
-      warn(_consoleLogger, msg, scope)
-    }
-  },
-  error: (msg: any[] | any, scope = 'default') => {
-    if (isDev) {
-      error(_consoleLogger, msg, scope)
-    }
-  },
-  fatal: (msg: any[] | any, scope = 'default') => {
-    if (isDev) {
-      fatal(_consoleLogger, msg, scope)
-    }
   }
 }

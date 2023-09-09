@@ -1,5 +1,5 @@
 appId: com.zzopen.cipher
-productName: cipher
+productName: ZZ Cipher
 directories:
   buildResources: build
 files:
@@ -12,7 +12,10 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: cipher
+  executableName: ZZ Cipher
+  extraFiles:
+    - from: resources/cipher-win
+      to: ./server/cipher-win
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
@@ -26,6 +29,9 @@ mac:
     - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
     - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
   notarize: false
+  extraFiles:
+    - from: resources/cipher-darwin
+      to: ./server/cipher-darwin
 dmg:
   artifactName: ${name}-${version}.${ext}
 linux:

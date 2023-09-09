@@ -1,18 +1,19 @@
 # command
-GO = go
+GO=go
 GO_CMD=GO111MODULE=on
-GO_VET = $(GO) vet
-GO_BUILD = $(GO) build
-GO_IMPORTS = goimports
-GO_FMT = gofmt
-GO_CTL = goctl
+GO_VET=$(GO) vet
+GO_BUILD=$(GO) build
+GO_IMPORTS=goimports
+GO_FMT=gofmt
+GO_CTL=goctl
 
 # path
-MAKEFILE_PATH = $(abspath $(lastword $(MAKEFILE_LIST)))
-MAKEFILE_DIR = $(abspath $(dir $(MAKEFILE_PATH)))
-CURRENT_PATH = $(MAKEFILE_DIR)
-ROOT_PATH= $(abspath $(CURRENT_PATH)/../)
-
+MAKEFILE_PATH=$(abspath $(lastword $(MAKEFILE_LIST)))
+MAKEFILE_DIR=$(abspath $(dir $(MAKEFILE_PATH)))
+CURRENT_PATH=$(MAKEFILE_DIR)
+ROOT_PATH=$(abspath $(CURRENT_PATH)/../)
+DESKTOP_PATH=$(abspath $(ROOT_PATH)/../desktop)
+DESKTOP_SERVER_OUT_PATH=$(abspath $(DESKTOP_PATH)/resources)
 
 ## 检查代码格式
 linters-install:

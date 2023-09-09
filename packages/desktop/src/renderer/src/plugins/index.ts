@@ -4,10 +4,10 @@ import { setupError } from './error'
 import { setupAntDesignVue } from './ant-design'
 import { setupStore } from './pinia'
 import { setupRouter } from './vue-router'
+import { initReq } from '@renderer/apis'
 
 export async function setupPlugins(app: App) {
-  // 异步加载请使用 setupXXX
-  // 同步加载请使用 installXXX
+  await initReq()
   setupGlobal(app)
   setupError(app)
   setupAntDesignVue(app)

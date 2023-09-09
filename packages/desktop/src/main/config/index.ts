@@ -1,3 +1,3 @@
 export * from './constant'
-export * from './backend-config'
+export * from './server-conf-file'
 export * from './config'

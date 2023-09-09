@@ -1,29 +1,33 @@
 include common.mk
 
-MK_CIPHER = cipher
+MK_CIPHER=cipher
 
 # path
-CIPHER_PATH= $(ROOT_PATH)/cipher
-CIPHER_OUT_PATH = $(CURRENT_PATH)/cipher-out
-ETC_PATH = $(CIPHER_PATH)/etc
+CIPHER_PATH=$(ROOT_PATH)/cipher
+CIPHER_OUT_PATH=$(CURRENT_PATH)/cipher-out
+ETC_PATH=$(CIPHER_PATH)/etc
 
-BIN_NAME = cipher
-CIPHER_GO_FILE_NAME = cipher.go
+BIN_NAME=cipher
+CIPHER_GO_FILE_NAME=cipher.go
 
-PRODUCT_CONF_FILE_NAME = cipher-api.yaml
-DEVELOP_CONF_FILE_NAME = cipher-api-dev.yaml
+PRODUCT_CONF_FILE_NAME=cipher-api.yaml
+DEVELOP_CONF_FILE_NAME=cipher-api-dev.yaml
 
 # platform
 DARWIN_BIN_NAME=$(BIN_NAME)-darwin
 WINDOWS_BIN_NAME=$(BIN_NAME).exe
 LINUX_BIN_NAME=$(BIN_NAME)-linux
 
+BUILD_BIN_PATH=$(CIPHER_OUT_PATH)/$(BIN_NAME)
+DARWIN_BIN_PATH=$(CIPHER_OUT_PATH)/$(DARWIN_BIN_NAME)
+WINDOWS_BIN_PATH=$(CIPHER_OUT_PATH)/$(WINDOWS_BIN_NAME)
+LINUX_BIN_PATH=$(CIPHER_OUT_PATH)/$(LINUX_BIN_NAME)
 # upx
 IF_UPX= $(shell command -v upx)
-BUILD_UPX=$(if $(IF_UPX), upx $(CIPHER_OUT_PATH)/$(BIN_NAME))
-DARWIN_UPX=$(if $(IF_UPX), upx $(CIPHER_OUT_PATH)/$(DARWIN_BIN_NAME))
-WINDOWS_UPX=$(if $(IF_UPX), upx $(CIPHER_OUT_PATH)/$(WINDOWS_BIN_NAME))
-LINUX_UPX=$(if $(IF_UPX), upx $(CIPHER_OUT_PATH)/$(LINUX_BIN_NAME))
+BUILD_UPX=$(if $(IF_UPX), upx $(BUILD_BIN_PATH))
+DARWIN_UPX=$(if $(IF_UPX), upx $(DARWIN_BIN_PATH))
+WINDOWS_UPX=$(if $(IF_UPX), upx $(WINDOWS_BIN_PATH))
+LINUX_UPX=$(if $(IF_UPX), upx $(LINUX_BIN_PATH))
 
 .PHONY: help all build windows linux darwin lint fmt gen-api gen clean dev pro
 
@@ -47,25 +51,29 @@ all: windows linux darwin
 ## build
 build:
 		@cd $(CIPHER_PATH) && $(GO_BUILD) -ldflags="-s -w" -o $(CIPHER_OUT_PATH)/$(BIN_NAME) ./$(CIPHER_GO_FILE_NAME) && \
-		$(BUILD_UPX)
+		$(BUILD_UPX) && \
+		cp $(BUILD_BIN_PATH) $(DESKTOP_SERVER_OUT_PATH)
 		@echo "build success ..."
 
 windows:
 		GOOS=windows
 		@cd $(CIPHER_PATH) && $(GO_BUILD) -ldflags="-s -w" -o $(CIPHER_OUT_PATH)/$(WINDOWS_BIN_NAME) ./$(CIPHER_GO_FILE_NAME) && \
-		$(WINDOWS_UPX)
+		$(WINDOWS_UPX) && \
+    cp $(WINDOWS_BIN_PATH) $(DESKTOP_SERVER_OUT_PATH)
 		@echo "windows success ..."
 
 linux:
 		GOOS=linux
 		@cd $(CIPHER_PATH) && $(GO_BUILD) -ldflags="-s -w" -o $(CIPHER_OUT_PATH)/$(LINUX_BIN_NAME) ./$(CIPHER_GO_FILE_NAME) && \
-		$(LINUX_UPX)
+		$(LINUX_UPX) && \
+    cp $(LINUX_BIN_PATH) $(DESKTOP_SERVER_OUT_PATH)
 		@echo "linux success ..."
 
 darwin:
 		GOOS=darwin
 		@cd $(CIPHER_PATH) && $(GO_BUILD) -ldflags="-s -w" -o $(CIPHER_OUT_PATH)/$(DARWIN_BIN_NAME) ./$(CIPHER_GO_FILE_NAME) && \
-		$(DARWIN_UPX)
+		$(DARWIN_UPX) && \
+		cp $(DARWIN_BIN_PATH) $(DESKTOP_SERVER_OUT_PATH)
 		@echo "darwin success ..."
 
 

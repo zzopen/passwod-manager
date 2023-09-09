@@ -1,9 +1,9 @@
 import { logger } from '@main/shared'
 import { createMainWindow } from '../wins/main-win'
 
-async function init() {
+const init = async () => {
   logger.info('start', 'init-renderer')
-  createMainWindow()
+  await createMainWindow()
   logger.info('end', 'init-renderer')
 }
 

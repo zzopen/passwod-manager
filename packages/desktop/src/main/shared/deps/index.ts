@@ -13,6 +13,7 @@ import portfinder from 'portfinder'
 export { portfinder }
 
 export { nativeImage, app, BrowserWindow, ipcMain, Menu, shell, globalShortcut } from 'electron'
+export type { Event } from 'electron'
 
 // import ElectronStore from 'electron-store'
 // export { ElectronStore }

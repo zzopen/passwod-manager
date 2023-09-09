@@ -6,7 +6,7 @@ export default {
   }
 }
 
-export function setupError(app: App) {
+export const setupError = async (app: App) => {
   // 全局异常处理
   app.config.errorHandler = (err) => {
     // 处理错误

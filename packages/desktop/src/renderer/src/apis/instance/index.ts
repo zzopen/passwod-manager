@@ -1,4 +1,11 @@
 export * from './types'
 import { AxiosRequest } from './request'
 
-export const req = new AxiosRequest()
+let req: AxiosRequest | undefined
+
+export const initReq = async () => {
+  const baseUrl = await window.preloadContext.mix.getAxiosBaseUrl()
+  req = new AxiosRequest({ baseURL: baseUrl })
+}
+
+export { req }

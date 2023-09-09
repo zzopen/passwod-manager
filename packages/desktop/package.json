@@ -1,5 +1,5 @@
 {
-  "name": "cipher",
+  "name": "zz-cipher",
   "private": true,
   "version": "0.0.1",
   "description": "An Electron application with Vue and TypeScript",
@@ -19,9 +19,9 @@
     "build:win": "npm run build && electron-builder --win --config",
     "build:mac": "pnpm run build && electron-builder --mac --config",
     "build:linux": "npm run build && electron-builder --linux --config",
-    "new": "plop",
     "latest": "pnpm up --latest",
-    "electron:generate-icons": "electron-icon-builder --input=./resources/icon.png --output=build --flatten"
+    "new-component": "plop",
+    "gen-icons": "node ./icon-gen/bin.cjs --input=./resources/icon.png --output=./resources --flatten"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
@@ -57,11 +57,14 @@
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^11.0.3",
     "ant-design-vue": "^4.0.1",
+    "args": "^5.0.3",
     "electron": "^25.8.0",
     "electron-builder": "^24.6.4",
     "electron-vite": "^1.0.27",
     "eslint": "^8.47.0",
     "eslint-plugin-vue": "^9.17.0",
+    "icon-gen": "^4.0.0",
+    "jimp": "^0.22.10",
     "less": "^4.2.0",
     "plop": "^3.1.2",
     "prettier": "^3.0.2",

@@ -10,7 +10,7 @@ defineOptions({ name: 'CreateSecretCategoryModal', inheritAttrs: false })
 
 const formRef = ref()
 const state = reactive<{ modalOpen: boolean; modalTitle: string }>({
-  modalTitle: '添加分类',
+  modalTitle: '创建分类',
   modalOpen: false
 })
 

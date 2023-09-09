@@ -1,12 +1,17 @@
 <script lang="ts" setup>
 import { useCssVar } from '@renderer/shared'
 import type { ThemeConfig, MenuProps, CSSProperties, ItemType } from '@renderer/shared/deps'
-import { emitLoadSecretBookList, listenerLoadSecretCategoryMenuList } from '@renderer/shared'
-import { useSecretCategoryStore } from '@renderer/stores'
+import {
+  emitLoadSecretBookList,
+  listenerLoadSecretCategoryMenuList,
+  listenerRefreshHomePage
+} from '@renderer/shared'
+import { useSecretCategoryStore, useSecretBookStore } from '@renderer/stores'
 
 defineOptions({ name: 'SecretCategoryMenu', inheritAttrs: false })
 const { layoutLeftBgColor } = useCssVar()
 const secretCategoryStore = useSecretCategoryStore()
+const secretBookStore = useSecretBookStore()
 
 const state = reactive<{
   dataSource: ItemType[]
@@ -40,26 +45,47 @@ const configTheme: ThemeConfig = {
   }
 }
 
-const ready = async () => {
+const ready = async (p?: { secret_category_id?: string }) => {
   await secretCategoryStore.loadCategoryList()
   state.dataSource = secretCategoryStore.getSecretCategoryList
-  if (state.dataSource.length > 0) {
-    const firstItem = unref(state.dataSource)[0]
-    if (firstItem && firstItem.key) {
-      state.selectedKeys.push(firstItem.key)
-      emitLoadSecretBookList({ secret_category_id: String(firstItem.key) })
+
+  let menuItem: ItemType = null
+  if (p && p.secret_category_id) {
+    for (const item of state.dataSource) {
+      if (item && item.key == p.secret_category_id) {
+        menuItem = item
+        break
+      }
+    }
+  } else {
+    // 默认选中第一个
+    if (state.dataSource.length > 0) {
+      menuItem = unref(state.dataSource)[0]
     }
   }
+
+  if (menuItem && menuItem.key) {
+    state.selectedKeys.push(menuItem.key)
+    secretBookStore.secretBookSearch.secret_category_id = String(menuItem.key)
+    emitLoadBookList()
+  }
 }
+
 onMounted(async () => {
   await ready()
 })
 
 const onClick: MenuProps['onClick'] = ({ key }) => {
-  emitLoadSecretBookList({ secret_category_id: String(key) })
+  secretBookStore.secretBookSearch.secret_category_id = String(key)
+  emitLoadBookList()
+}
+
+const emitLoadBookList = () => {
+  emitLoadSecretBookList(secretBookStore.secretBookSearch)
 }
 
 listenerLoadSecretCategoryMenuList(ready)
+listenerRefreshHomePage(ready)
 </script>
 
 <template>
@@ -81,7 +107,6 @@ listenerLoadSecretCategoryMenuList(ready)
 .secret-category-menu {
   min-height: 450px;
   height: calc(100vh - 220px);
-  border-bottom: 1px solid red;
   overflow-y: auto;
   overflow-x: hidden;
 

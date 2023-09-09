@@ -11,7 +11,7 @@ export interface ArpSecretCategoryList {
 
 export const getSecretCategoryListAction = async (): Promise<SecretCategorys> => {
   const apiDescription = Object.assign({}, API_SECRET_CATEGORY_LIST)
-  const { data, mark } = await req.request<SecretCategorys>(apiDescription)
+  const { data, mark } = await req!.request<SecretCategorys>(apiDescription)
   if (!mark || !data) {
     return []
   }

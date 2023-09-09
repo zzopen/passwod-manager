@@ -1,6 +1,4 @@
 import {
-  app,
-  Menu,
   shell,
   BrowserWindow,
   globalShortcut,
@@ -9,10 +7,12 @@ import {
   is,
   nativeImage
 } from '@main/shared/deps'
-import { isLinux, isMac, isWin } from '@main/shared'
+import type { Event } from '@main/shared/deps'
+import { isDev, logger } from '@main/shared'
+import icon from '@resources/icons/icon.ico?asset'
 
-import cipherIco from './icon.png?asset'
 import type { Nullable } from '@common/types'
+import { defaultConfig } from '@main/config'
 
 let mainWindow: Nullable<BrowserWindow>
 
@@ -30,7 +30,9 @@ const createWindow = async (): Promise<BrowserWindow> => {
     show: false,
     frame: true,
     autoHideMenuBar: true,
+    titleBarStyle: 'hiddenInset', //没有标题栏，只有关闭和最小化那三个按钮
     title: '',
+    icon: nativeImage.createFromPath(icon),
     webPreferences: {
       preload: nodePath.join(__dirname, '../preload/index.js'),
       sandbox: false,
@@ -42,31 +44,6 @@ const createWindow = async (): Promise<BrowserWindow> => {
   })
 
   windowListener()
-
-  const dockMenu = Menu.buildFromTemplate([
-    {
-      label: 'New Window',
-      click() {
-        console.log('New Window')
-      }
-    },
-    {
-      label: 'New Window with Settings',
-      submenu: [{ label: 'Basic' }, { label: 'Pro' }]
-    },
-    { label: 'New Command...' }
-  ])
-
-  const iconNativeImg = nativeImage.createFromPath(cipherIco)
-  if (isLinux || isWin) {
-    mainWindow.setIcon(iconNativeImg)
-  } else if (isMac) {
-    if (app.dock) {
-      app.dock.setMenu(dockMenu)
-      app.dock.setIcon(iconNativeImg)
-      app.dock.show().catch((e) => console.error('显示dock抛出异常:', e))
-    }
-  }
 
   // HMR for renderer base on electron-vite cli.
   // Load the remote URL for development or the local html file for production.
@@ -87,7 +64,9 @@ function windowListener() {
   mainWindow.setMenu(null)
 
   globalShortcut.register('CommandOrControl+Shift+j', function () {
-    openMainWindowDevTools()
+    if (isDev) {
+      switchMainWindowDevTools()
+    }
   })
 
   // Test active push message to Renderer-process.
@@ -96,10 +75,23 @@ function windowListener() {
   })
 
   mainWindow.on('ready-to-show', () => {
-    console.log('主窗口准备好显示了')
+    logger.info('主窗口准备好显示了', 'mainWindow ready-to-show')
     showMainWindow()
-    openMainWindowDevTools()
-    // console.log(app.getAppMetrics())
+  })
+
+  mainWindow.on('close', (event: Event) => {
+    logger.info('', 'mainWindow close')
+    if (defaultConfig.appWillQuit) {
+      mainWindow = null
+    } else {
+      event.preventDefault()
+      mainWindow?.hide()
+    }
+  })
+
+  mainWindow.on('closed', () => {
+    logger.info('', 'mainWindow closed')
+    mainWindow = null
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -108,14 +100,13 @@ function windowListener() {
   })
 
   mainWindow.on('will-resize', (event, newBounds, details) => {
-    console.log('-------- will-resize --------')
-    console.log('event:', event)
-    console.log('newBounds:', newBounds)
-    console.log('details:', details)
+    logger.info(event, 'mainWindow will-resize-event')
+    logger.info(newBounds, 'mainWindow will-resize-newBounds')
+    logger.info(details, 'mainWindow will-resize-details')
   })
 
   mainWindow.on('resized', () => {
-    console.log('-------- resized --------')
+    logger.info('', 'mainWindow resized')
   })
 }
 
@@ -124,21 +115,39 @@ function getMainWindow() {
 }
 
 function showMainWindow() {
-  mainWindow && mainWindow.show()
+  if (!mainWindow) {
+    return
+  }
+
+  mainWindow.show()
 }
 
 function closeMainWindow() {
-  mainWindow && mainWindow.close()
+  if (!mainWindow) {
+    return
+  }
+
+  mainWindow.close()
 }
 
-function openMainWindowDevTools() {
-  mainWindow && mainWindow.webContents.openDevTools()
+function switchMainWindowDevTools() {
+  if (!mainWindow) {
+    return
+  }
+
+  if (defaultConfig.openDevTools) {
+    mainWindow.webContents.closeDevTools()
+    defaultConfig.openDevTools = false
+  } else {
+    mainWindow.webContents.openDevTools()
+    defaultConfig.openDevTools = true
+  }
 }
 
 export {
   createWindow as createMainWindow,
   getMainWindow,
   closeMainWindow,
-  openMainWindowDevTools,
+  switchMainWindowDevTools,
   showMainWindow
 }

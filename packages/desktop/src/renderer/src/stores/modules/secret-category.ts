@@ -3,7 +3,7 @@ import { secretCategory } from '@renderer/apis'
 import type { ItemType } from '@renderer/shared/deps'
 import { buildDataOptions } from '@renderer/shared'
 import { useRequestStore } from './request'
-import type { SecretCategorys } from '@common/types'
+import type { Nullable, SecretCategorys, SecretCategory } from '@common/types'
 
 export interface SecretCategoryState {
   apiSecretCategoryList: SecretCategorys
@@ -44,6 +44,19 @@ export const useSecretCategoryStore = defineStore({
     async refreshSecretCategoryList() {
       this.resetApiSecretCategoryList()
       await this.loadCategoryList()
+    },
+    getSecretCategoryByKey(key?: string): Nullable<SecretCategory> {
+      if (!key) {
+        return null
+      }
+
+      for (const item of this.apiSecretCategoryList) {
+        if (item && item.id == key) {
+          return item
+        }
+      }
+
+      return null
     },
     /**** category select options ****/
     reset() {

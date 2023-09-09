@@ -11,6 +11,6 @@ export default {
   }
 }
 
-export function setupStore(app: App) {
+export const setupStore = async (app: App) => {
   app.use(pinia)
 }

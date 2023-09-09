@@ -3,7 +3,7 @@ import App from './App.vue'
 import { setupPlugins } from '@renderer/plugins'
 
 const app = createApp(App)
-async function bootstrap() {
+const bootstrap = async () => {
   await setupPlugins(app)
   app.mount('#app').$nextTick(() => postMessage({ payload: 'removeLoading' }, '*'))
 }

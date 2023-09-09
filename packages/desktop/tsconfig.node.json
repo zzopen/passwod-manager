@@ -13,7 +13,8 @@
       "@main/*": ["src/main/*"],
       "@preload/*": ["src/preload/*"],
       "@common/*": ["src/common/*"],
-      "@resources/*": ["resources/*"]
+      "@resources/*": ["resources/*"],
+      "@build/*": ["build/*"]
     }
   }
 }

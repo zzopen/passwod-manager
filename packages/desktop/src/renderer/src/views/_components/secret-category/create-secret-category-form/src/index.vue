@@ -3,6 +3,7 @@ import { createSecretCategoryFormProps } from './props'
 import { Form, useVModel } from '@renderer/shared/deps'
 import { useRequestStore, useSecretCategoryStore } from '@renderer/stores'
 import type { ArpCreateSecretCategory } from '@renderer/apis'
+import { consoleLog } from '@renderer/shared'
 
 defineOptions({ name: 'CreateSecretCategoryForm', inheritAttrs: false })
 
@@ -37,7 +38,7 @@ const onSubmit = async () => {
     emits('success')
     return true
   } catch (error) {
-    console.log('submit error:', error)
+    consoleLog('submit error:', error)
     return false
   }
 }
@@ -54,7 +55,8 @@ const submitForm = async () => {
 }
 
 defineExpose({
-  onSubmit
+  onSubmit,
+  resetFields
 })
 </script>
 
@@ -72,10 +74,6 @@ defineExpose({
           style="width: 200px"
           :options="options"
         ></a-select>
-      </a-form-item>
-      <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-        <a-button type="primary" @click.prevent="onSubmit">提交</a-button>
-        <a-button style="margin-left: 10px" @click="resetFields">重置</a-button>
       </a-form-item>
     </a-form>
   </div>

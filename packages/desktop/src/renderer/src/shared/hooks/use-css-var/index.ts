@@ -7,6 +7,8 @@ export interface GlobalCssVar {
   appLogoHeight: string
   appLogoImgWidth: string
   appLogoImgHeight: string
+  appLayoutHeaderHeight: string
+  appLayoutHeaderBgColor: string
 }
 
 const globalCssVar: GlobalCssVar = {
@@ -20,7 +22,9 @@ const globalCssVar: GlobalCssVar = {
   // app-logo
   appLogoHeight: '40px',
   appLogoImgWidth: '32px',
-  appLogoImgHeight: '32px'
+  appLogoImgHeight: '32px',
+  appLayoutHeaderHeight: '32px',
+  appLayoutHeaderBgColor: '#ffffff'
 }
 
 export function useCssVar() {

@@ -47,7 +47,7 @@ function defineConfig(/** @type {import('plop').NodePlopAPI} */ plop) {
         {
           type: 'add',
           path: `${componentParentDirPath}/${kebabCaseComponentName}/src/props.ts`,
-          templateFile: `${TEMPLATE_PATH}/src/component-props.ts.hbs`,
+          templateFile: `${TEMPLATE_PATH}/src/props.ts.hbs`,
           data: {
             camelCaseComponentName: camelCaseComponentName,
             pascalCaseComponentName: pascalCaseComponentName
@@ -57,7 +57,7 @@ function defineConfig(/** @type {import('plop').NodePlopAPI} */ plop) {
         {
           type: 'add',
           path: `${componentParentDirPath}/${kebabCaseComponentName}/src/index.vue`,
-          templateFile: `${TEMPLATE_PATH}/src/component.vue.hbs`,
+          templateFile: `${TEMPLATE_PATH}/src/index.vue.hbs`,
           data: {
             kebabCaseComponentName: kebabCaseComponentName,
             camelCaseComponentName: camelCaseComponentName,
@@ -68,7 +68,7 @@ function defineConfig(/** @type {import('plop').NodePlopAPI} */ plop) {
         // {
         //   type: 'add',
         //   path: `${componentParentDirPath}/${kebabCaseComponentName}/src/index.scss`,
-        //   templateFile: `${TEMPLATE_PATH}/src/component.scss.hbs`,
+        //   templateFile: `${TEMPLATE_PATH}/src/index.scss.hbs`,
         //   data: {
         //     kebabCaseComponentName: kebabCaseComponentName
         //   }

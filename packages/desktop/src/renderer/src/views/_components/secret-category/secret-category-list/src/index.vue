@@ -8,6 +8,7 @@ defineOptions({ name: 'SecretCategoryList', inheritAttrs: false })
 <template>
   <div class="secret-category-list">
     <secret-category-menu-action />
+    <a-divider style="margin: 2px auto" />
     <secret-category-menu />
   </div>
 </template>

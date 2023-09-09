@@ -5,6 +5,7 @@ import type {
   ArpDeleteSecretCategory,
   ArpGetSecretBookList,
   SecretBookDetailRequest,
+  ArpCreateSecretBook,
   ArpUpdateSecretBook,
   ArpDeleteSecretBook
 } from '@renderer/apis'
@@ -41,6 +42,10 @@ export const useRequestStore = defineStore({
     /**** api get secret-book detail ****/
     async getSecretBookDetail(p: SecretBookDetailRequest) {
       return await secretBook.secretBookDetailAction(p)
+    },
+    /**** api create secret-book ****/
+    async createSecretBook(p: ArpCreateSecretBook) {
+      return await secretBook.createSecretBookAction(p)
     },
     /**** api update secret-book ****/
     async updateSecretBook(p: ArpUpdateSecretBook) {

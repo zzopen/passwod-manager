@@ -1,0 +1,25 @@
+Name: cipher-api
+Host: 0.0.0.0
+Port: 50000
+Timeout: 10000
+KeepDays: 15
+Stat: false
+Mode: pro
+DevServer:
+  Enabled: true
+  Port: 7001
+  HealthPath: /health
+Log:
+  ServiceName: cipher-api
+  Mode: file
+  Encoding: json
+  Path: /Users/xulei/jungle/githubproject/my/zz-cipher/packages/desktop/.Cipher/server/logs
+  TimeFormat: 2006-01-02 15:04:05
+  Level: error
+Auth:
+  AccessSecret: abcdefghijklmn
+  AccessExpire: 2592000
+Sqlite:
+  DbFilePath: /Users/xulei/jungle/githubproject/my/zz-cipher/packages/desktop/.Cipher/server/db/cipher.db
+  Log:
+    Level: error

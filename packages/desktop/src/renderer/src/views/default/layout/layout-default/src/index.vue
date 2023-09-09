@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { useNamespace } from '@renderer/shared'
+import LayoutHeader from '@renderer/views/default/layout/layout-header'
 import LayoutLeft from '@renderer/views/default/layout/layout-left'
 import RouterViewWrapper from '@renderer/views/_components/router-view-wrapper'
 import CustomTeleport from '@renderer/views/_components/custom-teleport'
@@ -14,9 +15,12 @@ const getClass = computed(() => {
 
 <template>
   <a-layout :class="getClass">
-    <layout-left />
+    <layout-header />
     <a-layout>
-      <router-view-wrapper />
+      <layout-left />
+      <a-layout>
+        <router-view-wrapper />
+      </a-layout>
     </a-layout>
   </a-layout>
   <custom-teleport />

@@ -78,30 +78,52 @@ const onDelete = () => {
     }
   })
 }
+
+const descriptionItemSpan = 3
 </script>
 
 <template>
   <div class="secret-book-detail">
     <empty-state v-if="state.showEmptyStatus" />
     <template v-else>
-      <a-descriptions bordered :column="1">
+      <a-descriptions bordered size="small">
         <template #title>
           <div style="text-align: center">{{ state.dataSource.title }}</div>
         </template>
         <template #extra>
-          <a-button type="primary" @click="onUpdate">修改</a-button>
-          <a-button type="primary" danger @click="onDelete">删除</a-button>
+          <a-button type="primary" size="small" @click="onUpdate">修改</a-button>
+          <a-button type="primary" size="small" danger @click="onDelete">删除</a-button>
         </template>
-        <a-descriptions-item label="标题">{{ state.dataSource.title }}</a-descriptions-item>
-        <a-descriptions-item label="所属分类">{{
-          state.dataSource.secretCategoryName
+        <a-descriptions-item label="标题" :span="descriptionItemSpan"
+          ><span>{{ state.dataSource.title }}</span>
+          <xl-base-copy :text="state.dataSource.title" />
+        </a-descriptions-item>
+        <a-descriptions-item label="网址" :span="descriptionItemSpan"
+          ><span>{{ state.dataSource.website }}</span>
+          <xl-base-copy :text="state.dataSource.website"
+        /></a-descriptions-item>
+        <a-descriptions-item label="账号" :span="descriptionItemSpan">
+          <span>{{ state.dataSource.username }}</span
+          ><xl-base-copy :text="state.dataSource.username"
+        /></a-descriptions-item>
+        <a-descriptions-item label="密码" :span="descriptionItemSpan"
+          ><span>{{ state.dataSource.password }}</span
+          ><xl-base-copy :text="state.dataSource.password"
+        /></a-descriptions-item>
+        <a-descriptions-item label="所属分类" :span="descriptionItemSpan"
+          ><a-tag color="processing">{{
+            state.dataSource.secretCategoryName
+          }}</a-tag></a-descriptions-item
+        >
+        <a-descriptions-item label="邮箱" :span="descriptionItemSpan">{{
+          state.dataSource.email
         }}</a-descriptions-item>
-        <a-descriptions-item label="网址">{{ state.dataSource.website }}</a-descriptions-item>
-        <a-descriptions-item label="账号">{{ state.dataSource.username }}</a-descriptions-item>
-        <a-descriptions-item label="密码">{{ state.dataSource.password }}</a-descriptions-item>
-        <a-descriptions-item label="邮箱">{{ state.dataSource.email }}</a-descriptions-item>
-        <a-descriptions-item label="手机号">{{ state.dataSource.mobile }}</a-descriptions-item>
-        <a-descriptions-item label="备注">{{ state.dataSource.remark }}</a-descriptions-item>
+        <a-descriptions-item label="手机号" :span="descriptionItemSpan">{{
+          state.dataSource.mobile
+        }}</a-descriptions-item>
+        <a-descriptions-item label="备注" :span="descriptionItemSpan">{{
+          state.dataSource.remark
+        }}</a-descriptions-item>
       </a-descriptions>
     </template>
   </div>

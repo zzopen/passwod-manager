@@ -17,7 +17,7 @@ const aListProps = computed(() => {
   }
 })
 
-const ready = async (p: { secret_category_id: string }) => {
+const ready = async (p: { secret_category_id?: string }) => {
   await secretBookStore.loadSecretBookList(p)
   if (!secretBookStore.apiSecretBookList) {
     return
@@ -38,8 +38,6 @@ const ready = async (p: { secret_category_id: string }) => {
 listenerLoadSecretBookList(ready)
 
 const onClickListItem = (_, item) => {
-  // console.log('index:', index)
-  // console.log('item:', toRaw(item), item.id)
   emitSearchSecretBookDetail({ secret_book_id: item.id })
 }
 </script>

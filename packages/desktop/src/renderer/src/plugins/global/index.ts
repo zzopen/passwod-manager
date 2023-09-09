@@ -9,7 +9,7 @@ export default {
   }
 }
 
-export function setupGlobal(app: App) {
+export const setupGlobal = async (app: App) => {
   app.use(MyComponents)
   app.use(VueDOMPurifyHTML)
 }

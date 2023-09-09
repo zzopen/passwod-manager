@@ -5,12 +5,13 @@ import type { SecretBooks, SecretCategorys, SecretBook } from '@common/types'
 
 export interface ArpGetSecretBookList {
   secret_category_id?: string
+  secret_book_name?: string
   [propName: string]: any
 }
 
 export const getSecretBookListAction = async (p: ArpGetSecretBookList): Promise<SecretBooks> => {
   const apiDescription = Object.assign({}, API_SECRET_BOOK_LIST)
-  const { data, mark } = await req.request<SecretCategorys>(apiDescription, {
+  const { data, mark } = await req!.request<SecretCategorys>(apiDescription, {
     config: { params: p }
   })
 

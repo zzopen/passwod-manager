@@ -8,7 +8,7 @@ export default {
   }
 }
 
-export function setupAntDesignVue(app: App) {
+export const setupAntDesignVue = async (app: App) => {
   const icons: Component = antIcons
   for (const i in icons) {
     app.component(i, icons[i])

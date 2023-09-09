@@ -8,7 +8,7 @@ export default {
   }
 }
 
-export function setupRouter(app: App) {
+export const setupRouter = async (app: App) => {
   app.use(router)
   setupRouterGuard(router)
 }

@@ -37,18 +37,7 @@ const configTheme: ThemeConfig = {
   }
 }
 
-const onClick: MenuProps['onClick'] = (e) => {
-  console.log('click', e)
-}
-
-const onSelect: MenuProps['onSelect'] = ({ item, key, selectedKeys }) => {
-  console.log('item', item)
-  console.log('key', key)
-  console.log('selectedKeys', selectedKeys)
-}
-watch(openKeys, (val) => {
-  console.log('openKeys', val)
-})
+const onClick: MenuProps['onClick'] = () => {}
 </script>
 
 <template>
@@ -62,7 +51,6 @@ watch(openKeys, (val) => {
         theme="dark"
         :items="items"
         @click="onClick"
-        @select="onSelect"
       ></a-menu>
     </a-config-provider>
   </div>
@@ -72,7 +60,6 @@ watch(openKeys, (val) => {
 .secret-category-tree-menu {
   min-height: 450px;
   height: calc(100vh - 220px);
-  border-bottom: 1px solid red;
   overflow-y: auto;
   overflow-x: hidden;
 

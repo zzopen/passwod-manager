@@ -11,7 +11,7 @@ export const secretBookDetailAction = async (
   p: SecretBookDetailRequest
 ): Promise<Nullable<SecretBook>> => {
   const apiDescription = Object.assign({}, API_SECRET_BOOK_DETAIL)
-  const { data, mark } = await req.request<SecretBook>(apiDescription, {
+  const { data, mark } = await req!.request<SecretBook>(apiDescription, {
     config: { params: p }
   })
 

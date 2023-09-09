@@ -16,7 +16,7 @@ export interface ArpUpdateSecretBook {
 
 export const updateSecretBookAction = async (p: ArpUpdateSecretBook): Promise<boolean> => {
   const apiDescription = Object.assign({}, API_UPDATE_SECRET_BOOK)
-  const { mark } = await req.request(apiDescription, { data: p })
+  const { mark } = await req!.request(apiDescription, { data: p })
   if (!mark) {
     return false
   }

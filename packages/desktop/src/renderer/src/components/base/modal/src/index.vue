@@ -16,12 +16,10 @@ const getClass = computed(() => {
 
 const handleOk = (event: Event) => {
   emits('ok', event)
-  console.log('ok-openRef:', openRef.value)
 }
 
 const handleCancel = (event: Event) => {
   emits('cancel', event)
-  console.log('cancel-openRef:', openRef.value)
 }
 </script>
 

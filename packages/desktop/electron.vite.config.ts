@@ -21,7 +21,8 @@ export default defineConfig({
       alias: {
         '@main': resolve('src/main'),
         '@common': resolve('src/common'),
-        '@resources': resolve('resources')
+        '@resources': resolve('resources'),
+        '@build': resolve('build'),
       }
     },
     plugins: [externalizeDepsPlugin()]
