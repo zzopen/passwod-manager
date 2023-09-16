@@ -1,11 +1,15 @@
 package model
 
 import (
+	"fmt"
 	"github.com/duke-git/lancet/v2/slice"
 	"gorm.io/gorm"
 	"zz-cipher/common/core/service/secretcategoryservice"
 	"zz-cipher/common/core/tool"
 )
+
+const DefaultSecretCategoryId = 1
+const DefaultSecretCategoryName = "默认"
 
 type SecretCategory struct {
 	PrimaryKeyField
@@ -59,5 +63,14 @@ func (m *SecretCategory) GetChainIds() []string {
 }
 
 func (m *SecretCategory) IsSuperior(pid uint64) bool {
+	fmt.Println("chainid:", m.GetChainIds(), pid)
 	return slice.IndexOf(m.GetChainIds(), tool.Uint64ToString(pid)) != -1
+}
+
+func (m *SecretCategory) IsDefault() bool {
+	return m.Name == DefaultSecretCategoryName && m.Id == DefaultSecretCategoryId
+}
+
+func (m *SecretCategory) IsTopLevel() bool {
+	return m.Pid == 0
 }

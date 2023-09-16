@@ -58,6 +58,14 @@ export const useSecretCategoryStore = defineStore({
 
       return null
     },
+    isDefaultSecretCategory(key?: string): boolean {
+      const res = this.getSecretCategoryByKey(key)
+      if (!res) {
+        return false
+      }
+
+      return res.isDefault ? true : false
+    },
     /**** category select options ****/
     reset() {
       this.$patch((state) => {

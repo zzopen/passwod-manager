@@ -1,4 +1,4 @@
-import { cloneDeep, omit } from 'lodash-es'
+import { cloneDeep, omit } from 'lodash'
 
 export const lodashFn = {
   cloneDeep,

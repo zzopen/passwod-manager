@@ -1,6 +1,36 @@
 import type { ApiDescription } from '@renderer/apis/instance'
 import { METHOD } from '@renderer/apis/instance'
 
+// /secretbook/create
+const URL_CREATE_SECRET_BOOK = '/secretbook/create'
+const API_CREATE_SECRET_BOOK: ApiDescription = {
+  desc: '创建密码记录',
+  url: URL_CREATE_SECRET_BOOK,
+  method: METHOD.POST
+}
+
+export { URL_CREATE_SECRET_BOOK, API_CREATE_SECRET_BOOK }
+
+// /secretbook/delete
+const URL_DELETE_SECRET_BOOK = '/secretbook/delete'
+const API_DELETE_SECRET_BOOK: ApiDescription = {
+  desc: '删除密码记录',
+  url: URL_DELETE_SECRET_BOOK,
+  method: METHOD.POST
+}
+
+export { URL_DELETE_SECRET_BOOK, API_DELETE_SECRET_BOOK }
+
+// /secretbook/update
+const URL_UPDATE_SECRET_BOOK = '/secretbook/update'
+const API_UPDATE_SECRET_BOOK: ApiDescription = {
+  desc: '修改密码记录',
+  url: URL_UPDATE_SECRET_BOOK,
+  method: METHOD.POST
+}
+
+export { URL_UPDATE_SECRET_BOOK, API_UPDATE_SECRET_BOOK }
+
 // /secretbook/list
 const URL_SECRET_BOOK_LIST = '/secretbook/list'
 const API_SECRET_BOOK_LIST: ApiDescription = {
@@ -20,33 +50,3 @@ const API_SECRET_BOOK_DETAIL: ApiDescription = {
 }
 
 export { URL_SECRET_BOOK_DETAIL, API_SECRET_BOOK_DETAIL }
-
-// /secretbook/create
-const URL_CREATE_SECRET_BOOK = '/secretbook/create'
-const API_CREATE_SECRET_BOOK: ApiDescription = {
-  desc: '创建密码记录',
-  url: URL_CREATE_SECRET_BOOK,
-  method: METHOD.POST
-}
-
-export { URL_CREATE_SECRET_BOOK, API_CREATE_SECRET_BOOK }
-
-// /secretbook/update
-const URL_UPDATE_SECRET_BOOK = '/secretbook/update'
-const API_UPDATE_SECRET_BOOK: ApiDescription = {
-  desc: '修改密码记录',
-  url: URL_UPDATE_SECRET_BOOK,
-  method: METHOD.POST
-}
-
-export { URL_UPDATE_SECRET_BOOK, API_UPDATE_SECRET_BOOK }
-
-// /secretbook/delete
-const URL_DELETE_SECRET_BOOK = '/secretbook/delete'
-const API_DELETE_SECRET_BOOK: ApiDescription = {
-  desc: '删除密码记录',
-  url: URL_DELETE_SECRET_BOOK,
-  method: METHOD.POST
-}
-
-export { URL_DELETE_SECRET_BOOK, API_DELETE_SECRET_BOOK }

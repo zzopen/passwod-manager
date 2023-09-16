@@ -24,6 +24,7 @@ type DetailResponseData struct {
 	CreatedAt     string `json:"created_at"`
 	UpdatedAt     string `json:"updated_at"`
 	DataUpdatedAt string `json:"data_updated_at"`
+	IsDefault     bool   `json:"is_default"`
 }
 
 func NewDetailLogic(ctx context.Context, svcCtx *svc.ServiceContext) *DetailLogic {
@@ -52,6 +53,7 @@ func (l *DetailLogic) Detail(req *types.SecretCategoryDetailReq) (resp *response
 		CreatedAt:     secretCategory.CreatedAt.String(),
 		UpdatedAt:     secretCategory.UpdatedAt.String(),
 		DataUpdatedAt: secretCategory.DataUpdatedAt.String(),
+		IsDefault:     secretCategory.IsDefault(),
 	}
 
 	return response.SuccessWithData(res), nil

@@ -7,11 +7,11 @@ import (
 )
 
 func NewDb(c config.Config) *gorm.DB {
-  if c.Sqlite.DbFilePath == "" {
+  if c.Custom.Sqlite.DbFilePath == "" {
     panic("DbFilePath is empty")
   }
 
-  db, err := gorm.Open(sqlite.Open(c.Sqlite.DbFilePath+"?mode=wal"), &gorm.Config{
+  db, err := gorm.Open(sqlite.Open(c.Custom.Sqlite.DbFilePath+"?mode=wal"), &gorm.Config{
     Logger:                                   NewDbLogger(c),
     SkipDefaultTransaction:                   true,
     DisableForeignKeyConstraintWhenMigrating: true,

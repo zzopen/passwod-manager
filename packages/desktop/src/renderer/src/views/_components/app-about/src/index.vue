@@ -9,20 +9,30 @@ const { b } = useNamespace('app-about')
 const getClass = computed(() => {
   return [b()]
 })
+
+const open = ref(false)
+const onClickMenu = () => {
+  open.value = false
+}
 </script>
 
 <template>
   <div :class="getClass">
     <a-row>
       <a-col>
-        <a-dropdown trigger="click" :arrow="{ pointAtCenter: true }" placement="bottomRight">
+        <a-dropdown
+          v-model:open="open"
+          trigger="click"
+          :arrow="{ pointAtCenter: true }"
+          placement="bottomRight"
+        >
           <a-button type="text" style="width: 35px" @click.prevent>
             <template #icon>
               <setting-two-tone style="font-size: 12px" />
             </template>
           </a-button>
           <template #overlay>
-            <app-about-menu />
+            <app-about-menu @click="onClickMenu" />
           </template>
         </a-dropdown>
       </a-col>

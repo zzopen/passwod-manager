@@ -86,3 +86,10 @@ type SecretCategoryListReq struct {
 
 type SecretCategoryTreeListReq struct {
 }
+
+type ExportDataReq struct {
+	Format   string `json:"format,optional" validate:"required,oneof=json csv excel" label:"数据格式"`
+	Encrypt  string `json:"encrypt,optional" validate:"required,oneof=1 2" label:"加密选项"`
+	FileName string `json:"file_name,optional" validate:"required" label:"导出文件名"`
+	OutDir   string `json:"out_dir,optional" validate:"required" label:"输出目录"`
+}

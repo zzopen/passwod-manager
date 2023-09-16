@@ -14,6 +14,12 @@ export type { ArpCreateSecretCategory } from './create-secret-category'
 import { deleteSecretCategoryAction } from './delete-secret-category'
 export type { ArpDeleteSecretCategory } from './delete-secret-category'
 
+import { updateSecretCategoryAction } from './update-secret-category'
+export type { ArpUpdateSecretCategory } from './update-secret-category'
+
+import { secretCategoryDetailAction } from './secret-category-detail'
+export type { SecretCategoryDetailRequest } from './secret-category-detail'
+
 export const secretCategory = {
   getCategoryMenuTreeList,
   getSecretCategoryTreeListAction,
@@ -21,5 +27,7 @@ export const secretCategory = {
   getSecretCategoryListAction,
   buildMenuList,
   createSecretCategoryAction,
-  deleteSecretCategoryAction
+  deleteSecretCategoryAction,
+  updateSecretCategoryAction,
+  secretCategoryDetailAction
 }

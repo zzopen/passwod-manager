@@ -5,6 +5,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"zz-cipher/cipher/internal/svc"
 	"zz-cipher/cipher/internal/types"
+	"zz-cipher/common/core/crypt/aes"
 	"zz-cipher/common/core/response"
 	"zz-cipher/common/core/tool"
 )
@@ -54,8 +55,8 @@ func (l *DetailLogic) Detail(req *types.SecretBookDetailReq) (resp *response.Api
 		Id:            tool.Uint64ToString(secretBook.Id),
 		Title:         secretBook.Title,
 		Website:       secretBook.Website,
-		Username:      secretBook.Username,
-		Password:      secretBook.Password,
+		Username:      aes.CbcDecrypt(secretBook.Username, l.svcCtx.Config.Custom.AesKey),
+		Password:      aes.CbcDecrypt(secretBook.Password, l.svcCtx.Config.Custom.AesKey),
 		Email:         secretBook.Email,
 		Mobile:        secretBook.Mobile,
 		Remark:        secretBook.Remark,

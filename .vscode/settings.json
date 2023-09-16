@@ -9,7 +9,7 @@
     "**/dist": false,
     "**/.github": false,
     "**/.history": true,
-    "**/backend": false
+    "**/backend": true
   },
   "tslint.enable": false,
   "prettier.enable": true,

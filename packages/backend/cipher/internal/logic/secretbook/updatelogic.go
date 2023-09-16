@@ -5,6 +5,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"zz-cipher/cipher/internal/svc"
 	"zz-cipher/cipher/internal/types"
+	"zz-cipher/common/core/crypt/aes"
 	"zz-cipher/common/core/model"
 	"zz-cipher/common/core/response"
 	"zz-cipher/common/core/tool"
@@ -52,15 +53,21 @@ func (l *UpdateLogic) Update(req *types.SecretBookUpdateReq) (resp *response.Api
 	m := make(map[string]any)
 	m["title"] = req.Title
 	m["website"] = req.Website
-	m["username"] = req.Username
-	m["password"] = req.Password
 	m["mobile"] = req.Mobile
 	m["email"] = req.Email
 	m["remark"] = req.Remark
 	if secretCategory != nil {
 		m["secret_category_id"] = secretCategory.Id
 	} else {
-		m["secret_category_id"] = 0
+		m["secret_category_id"] = model.DefaultSecretCategoryId
+	}
+
+	if l.svcCtx.Config.Custom.SaveEncrypt {
+		m["username"] = aes.CbcEncrypt(req.Username, l.svcCtx.Config.Custom.AesKey)
+		m["password"] = aes.CbcEncrypt(req.Password, l.svcCtx.Config.Custom.AesKey)
+	} else {
+		m["username"] = req.Username
+		m["password"] = req.Password
 	}
 
 	if err = l.svcCtx.SecretBookRepository.UpdateById(secretBook.Id, m); err != nil {

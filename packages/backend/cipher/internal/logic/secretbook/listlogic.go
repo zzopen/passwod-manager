@@ -5,6 +5,7 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 	"zz-cipher/cipher/internal/svc"
 	"zz-cipher/cipher/internal/types"
+	"zz-cipher/common/core/crypt/aes"
 	"zz-cipher/common/core/model"
 	"zz-cipher/common/core/response"
 	"zz-cipher/common/core/tool"
@@ -63,7 +64,7 @@ func (l *ListLogic) List(req *types.SecretBookListReq) (resp *response.ApiRespon
 	if !isSecretCategoryIdEmpty {
 		secretBookList, _ = l.svcCtx.SecretBookRepository.GetListBySecretCategoryId(secretCategoryId)
 	} else {
-		secretBookList, _ = l.svcCtx.SecretBookRepository.GetAll()
+		secretBookList, _ = l.svcCtx.SecretBookRepository.GetAllNormal()
 	}
 
 	if secretBookList == nil {
@@ -75,8 +76,8 @@ func (l *ListLogic) List(req *types.SecretBookListReq) (resp *response.ApiRespon
 			Id:               v.Id,
 			Title:            v.Title,
 			Website:          v.Website,
-			Username:         v.Username,
-			Password:         v.Password,
+			Username:         aes.CbcDecrypt(v.Username, l.svcCtx.Config.Custom.AesKey),
+			Password:         aes.CbcDecrypt(v.Password, l.svcCtx.Config.Custom.AesKey),
 			CreatedAt:        v.CreatedAt.String(),
 			UpdatedAt:        v.UpdatedAt.String(),
 			DataUpdatedAt:    v.DataUpdatedAt.String(),

@@ -1,0 +1,27 @@
+syntax = "v1"
+
+info(
+		author: "许磊"
+  	date:   "2023-07-23"
+  	desc:   "导出模块"
+)
+
+type (
+  ExportDataReq {
+    Format string `json:"format,optional" validate:"required,oneof=json csv excel" label:"数据格式"`
+    Encrypt string `json:"encrypt,optional" validate:"required,oneof=1 2" label:"加密选项"`
+    FileName string `json:"file_name,optional" validate:"required" label:"导出文件名"`
+    OutDir string `json:"out_dir,optional" validate:"required" label:"输出目录"`
+  }
+)
+
+@server (
+    group: export
+    prefix: export
+)
+
+service cipher-api {
+  @doc "导出数据库数据"
+	@handler data
+	post /data (ExportDataReq) returns (Reply)
+}

@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	example "zz-cipher/cipher/internal/handler/example"
+	export "zz-cipher/cipher/internal/handler/export"
 	jwt "zz-cipher/cipher/internal/handler/jwt"
 	secretbook "zz-cipher/cipher/internal/handler/secretbook"
 	secretcategory "zz-cipher/cipher/internal/handler/secretcategory"
@@ -101,5 +102,16 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			},
 		},
 		rest.WithPrefix("/secretcategory"),
+	)
+
+	server.AddRoutes(
+		[]rest.Route{
+			{
+				Method:  http.MethodPost,
+				Path:    "/data",
+				Handler: export.DataHandler(serverCtx),
+			},
+		},
+		rest.WithPrefix("/export"),
 	)
 }

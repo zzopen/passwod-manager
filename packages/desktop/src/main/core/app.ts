@@ -1,7 +1,7 @@
 import { app, nodeProcess } from '@main/shared/deps'
 import { initLogger, appQuit, logger } from '@main/shared'
 import { initDefaultConfig } from '@main/config'
-import { makeDir, initConfig, initIpc, initAppOn,startServer,initRenderer } from './init'
+import { makeDir, initConfig, initIpc, initAppOn, startServer, initRenderer } from './init'
 
 const whenReady = async () => {
   logger.info('start', 'whenReady')

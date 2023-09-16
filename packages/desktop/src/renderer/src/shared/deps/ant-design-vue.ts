@@ -23,7 +23,11 @@ export {
 
 export { Form, message, Modal } from 'ant-design-vue'
 
-export type { MenuProps, ItemType, DrawerProps, SelectProps, ButtonProps } from 'ant-design-vue'
+export type { MenuProps, DrawerProps, SelectProps, ButtonProps } from 'ant-design-vue'
+import type { ItemType as antMenuItemType } from 'ant-design-vue'
+
+export type ItemType = NonNullable<antMenuItemType>
+
 export type { SelectValue } from 'ant-design-vue/es/select/index'
 
 export { type ThemeConfig } from 'ant-design-vue/es/config-provider/context'

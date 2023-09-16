@@ -38,7 +38,7 @@ func NewTreeListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *TreeList
 
 func (l *TreeListLogic) TreeList(req *types.SecretCategoryTreeListReq) (resp *response.ApiResponse, err error) {
 	res := tool.EmptySlice[*TreeListItem]()
-	secretCategoryList, _ := l.svcCtx.SecretCategoryRepository.GetAll()
+	secretCategoryList, _ := l.svcCtx.SecretCategoryRepository.GetAllNormal()
 	if secretCategoryList == nil {
 		return response.SuccessWithData(res), nil
 	}

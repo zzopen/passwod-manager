@@ -57,10 +57,10 @@ func (repo *SecretCategoryRepository) UpdateById(id uint64, m map[string]any) er
 	return nil
 }
 
-// GetAll 获取全部记录
-func (repo *SecretCategoryRepository) GetAll() ([]*model.SecretCategory, error) {
+// GetAllNormal 获取全部正常记录
+func (repo *SecretCategoryRepository) GetAllNormal() ([]*model.SecretCategory, error) {
 	q := repo.SecretCategory
-	res, err := q.WithContext(repo.ctx).Where(q.IsDel.Eq(tool.FlagNormal)).Find()
+	res, err := q.WithContext(repo.ctx).Where(q.IsDel.Eq(tool.FlagNormal)).Order(q.Id).Find()
 	if err != nil {
 		return nil, err
 	}
@@ -82,4 +82,28 @@ func (repo *SecretCategoryRepository) DeleteById(id uint64, m map[string]any) er
 	}
 
 	return nil
+}
+
+// GetAll 获取全部记录
+func (repo *SecretCategoryRepository) GetAll() ([]*model.SecretCategory, error) {
+	q := repo.SecretCategory
+	res, err := q.WithContext(repo.ctx).Order(q.Id).Find()
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+func (repo *SecretCategoryRepository) ToMap(list []*model.SecretCategory) map[string]*model.SecretCategory {
+	m := make(map[string]*model.SecretCategory)
+	if list == nil {
+		return m
+	}
+
+	for _, secretCategory := range list {
+		m[tool.Uint64ToString(secretCategory.Id)] = secretCategory
+	}
+
+	return m
 }

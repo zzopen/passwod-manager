@@ -10,10 +10,14 @@ type Config struct {
 		AccessExpire int64  // 有效期，单位：秒
 	}
 
-	Sqlite struct {
-		DbFilePath string
-    Log struct {
-      Level string
-    }
+	Custom struct {
+		SaveEncrypt bool
+		AesKey      string
+		Sqlite      struct {
+			DbFilePath string
+			Log        struct {
+				Level string
+			}
+		}
 	}
 }

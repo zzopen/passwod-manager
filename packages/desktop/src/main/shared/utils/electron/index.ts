@@ -1,4 +1,4 @@
-import { app, nodePath } from '@main/shared/deps'
+import { app, nodePath, BrowserWindow, IpcMainEvent } from '@main/shared/deps'
 
 export const appQuit = async () => {
   app.quit()
@@ -26,4 +26,23 @@ export const getAppExeDirPath = (): string => {
 
 export const getAppHomeDirPath = (): string => {
   return app.getPath('home')
+}
+
+export const getAppDownloadDirPath = (): string => {
+  return app.getPath('downloads')
+}
+
+export const getAppDesktopDirPath = (): string => {
+  return app.getPath('desktop')
+}
+
+export const getWindowByEvent = (event: IpcMainEvent): BrowserWindow | undefined => {
+  const webContentsId = event.sender.id
+  for (const currentWin of BrowserWindow.getAllWindows()) {
+    if (currentWin.webContents.id === webContentsId) {
+      return currentWin
+    }
+  }
+
+  return
 }

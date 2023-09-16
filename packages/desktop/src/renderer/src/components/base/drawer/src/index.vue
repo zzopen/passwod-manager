@@ -13,13 +13,10 @@ const getClass = computed(() => {
   return [b()]
 })
 
-const handleAfterOpenChange = () => {
-  //console.log('handleAfterOpenChange-open', openRef.value)
-}
+const handleAfterOpenChange = () => {}
 
 const handleClose = (event: Event) => {
   emits('close', event)
-  //console.log('handleAfterOpenChange-close', openRef.value)
 }
 </script>
 

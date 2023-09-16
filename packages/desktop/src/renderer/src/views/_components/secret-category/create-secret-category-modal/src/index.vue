@@ -28,7 +28,7 @@ const onOk = async () => {
     return
   }
 
-  message.info('创建成功')
+  message.success('创建成功')
   emitLoadSecretCategoryMenuList()
   onCancel()
 }

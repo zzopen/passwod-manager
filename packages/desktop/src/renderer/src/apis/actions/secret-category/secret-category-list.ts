@@ -49,6 +49,7 @@ function _transfer(items: any): SecretCategorys {
       createdAt: item.created_at ?? '',
       updatedAt: item.updated_at ?? '',
       dataUpdatedAt: item.data_updated_at ?? '',
+      isDefault: item.is_default ?? false,
       children: []
     }
 

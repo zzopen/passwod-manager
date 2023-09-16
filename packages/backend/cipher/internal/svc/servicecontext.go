@@ -1,15 +1,15 @@
 package svc
 
 import (
-  "context"
-  "github.com/zeromicro/go-zero/rest"
-  "zz-cipher/cipher/internal/config"
-  "zz-cipher/cipher/internal/db/sqlite"
-  "zz-cipher/common/core/model"
-  "zz-cipher/common/core/query"
-  "zz-cipher/common/core/repository"
+	"context"
+	"github.com/zeromicro/go-zero/rest"
+	"zz-cipher/cipher/internal/config"
+	"zz-cipher/cipher/internal/db/sqlite"
+	"zz-cipher/common/core/migrate"
+	"zz-cipher/common/core/query"
+	"zz-cipher/common/core/repository"
 
-  "gorm.io/gorm"
+	"gorm.io/gorm"
 )
 
 type ServiceContext struct {
@@ -26,8 +26,7 @@ func NewServiceContext(c config.Config) *ServiceContext {
 
 	sqliteDb := sqlite.NewDb(c)
 	query.SetDefault(sqliteDb)
-	_ = sqliteDb.AutoMigrate(&model.SecretBook{}, &model.SecretCategory{}, model.MyTest{})
-
+	migrate.AutoMigrate(sqliteDb)
 	return &ServiceContext{
 		Ctx:                      ctx,
 		Config:                   c,

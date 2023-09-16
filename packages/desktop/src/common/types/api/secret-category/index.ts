@@ -8,6 +8,7 @@ export interface SecretCategory {
   updatedAt?: string
   dataUpdatedAt?: string
   parentName?: string
+  isDefault?: boolean
 }
 
 export type SecretCategorys = SecretCategory[]

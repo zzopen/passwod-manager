@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import { useCssVar } from '@renderer/shared'
-import type { ThemeConfig, MenuProps, CSSProperties, ItemType } from '@renderer/shared/deps'
+import type { MenuProps, CSSProperties, ItemType } from '@renderer/shared/deps'
+import { useMouse } from '@renderer/shared/deps'
 import {
   emitLoadSecretBookList,
+  emitOpenSecretCategoryMenuContextmenu,
   listenerLoadSecretCategoryMenuList,
   listenerRefreshHomePage
 } from '@renderer/shared'
@@ -12,6 +14,7 @@ defineOptions({ name: 'SecretCategoryMenu', inheritAttrs: false })
 const { layoutLeftBgColor } = useCssVar()
 const secretCategoryStore = useSecretCategoryStore()
 const secretBookStore = useSecretBookStore()
+const { x, y } = useMouse()
 
 const state = reactive<{
   dataSource: ItemType[]
@@ -34,22 +37,22 @@ const menuStyle = computed<CSSProperties>(() => {
   }
 })
 
-const configTheme: ThemeConfig = {
-  components: {
-    Menu: {
-      colorPrimary: '#00b96b',
-      colorItemBg: layoutLeftBgColor,
-      colorSubItemBg: layoutLeftBgColor,
-      colorItemBgSelected: 'red'
-    }
-  }
-}
+// const configTheme: ThemeConfig = {
+//   components: {
+//     Menu: {
+//       colorPrimary: '#00b96b',
+//       colorItemBg: layoutLeftBgColor,
+//       colorSubItemBg: layoutLeftBgColor,
+//       colorItemBgSelected: 'red'
+//     }
+//   }
+// }
 
 const ready = async (p?: { secret_category_id?: string }) => {
   await secretCategoryStore.loadCategoryList()
   state.dataSource = secretCategoryStore.getSecretCategoryList
 
-  let menuItem: ItemType = null
+  let menuItem: ItemType | undefined
   if (p && p.secret_category_id) {
     for (const item of state.dataSource) {
       if (item && item.key == p.secret_category_id) {
@@ -84,20 +87,39 @@ const emitLoadBookList = () => {
   emitLoadSecretBookList(secretBookStore.secretBookSearch)
 }
 
+const onRight = (item: ItemType) => {
+  const key = String(item?.key)
+  if (secretCategoryStore.isDefaultSecretCategory(key)) {
+    return
+  }
+
+  emitOpenSecretCategoryMenuContextmenu({
+    secret_category_id: key,
+    secret_category_name: item['label'],
+    x: unref(x),
+    y: unref(y)
+  })
+}
+
 listenerLoadSecretCategoryMenuList(ready)
 listenerRefreshHomePage(ready)
 </script>
 
 <template>
   <div class="secret-category-menu">
-    <a-config-provider :theme="configTheme">
+    <a-config-provider>
+      <div>x:{{ x }}; y:{{ y }}</div>
       <a-menu
         v-bind="menuProps"
         v-model:selectedKeys="state.selectedKeys"
         :style="menuStyle"
-        :items="state.dataSource"
         @click="onClick"
       >
+        <template v-for="item in state.dataSource" :key="item?.key">
+          <a-menu-item :icon="item['icon']" @click.right="onRight(item)">
+            {{ item['label'] }}
+          </a-menu-item>
+        </template>
       </a-menu>
     </a-config-provider>
   </div>

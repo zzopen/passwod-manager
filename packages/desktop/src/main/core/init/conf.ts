@@ -21,7 +21,7 @@ async function _generateServerConfFile() {
   defaultServerConfFile.Host = defaultConfig.server.host
   defaultServerConfFile.Port = defaultConfig.server.port
   defaultServerConfFile.Log!.Path = defaultConfig.server.logDirPath
-  defaultServerConfFile.Sqlite!.DbFilePath = defaultConfig.server.dbFilePath
+  defaultServerConfFile.Custom!.Sqlite!.DbFilePath = defaultConfig.server.dbFilePath
 
   // 创建yaml配置文件
   const res = await writeToYaml(defaultConfig.server.confFilePath, defaultServerConfFile)

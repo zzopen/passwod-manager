@@ -17,7 +17,7 @@ export function getMenuItem(
     icon,
     children,
     type
-  }
+  } as ItemType
 }
 
 export function buildDataOptions(data: any[], labelKey = 'name', valueKey = 'id'): SelectOptions {

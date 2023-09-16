@@ -36,6 +36,10 @@ func (l *DeleteLogic) Delete(req *types.SecretCategoryDeleteReq) (resp *response
 		return response.Success(), nil
 	}
 
+	if secretCategory.IsDefault() {
+		return response.Success(), nil
+	}
+
 	m := make(map[string]any)
 	m["deleted_by"] = "管理员"
 

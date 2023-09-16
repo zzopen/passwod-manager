@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { consoleLog } from '@renderer/shared'
+import { consoleLog, emitOpenExportDataModal } from '@renderer/shared'
 import {
   SyncOutlined,
   ToolOutlined,
@@ -13,14 +13,40 @@ import {
 } from '@renderer/shared/deps'
 
 defineOptions({ name: 'AppAboutMenu', inheritAttrs: false })
+const emits = defineEmits(['click'])
+
 const onClickLogout = async () => {
   consoleLog('onClickLogout', '正在退出')
+  emitClickMenu()
   await window.preloadContext.mix.appQuit()
 }
 
 const onClickSwitchDevTools = async () => {
   consoleLog('onClickSwitchDevTools', '切换开发者工具')
+  emitClickMenu()
   await window.preloadContext.mix.switchDevTools()
+}
+
+const onClickImportData = async () => {
+  consoleLog('onClickImportData', '导入数据')
+  emitClickMenu()
+  await window.preloadContext.mix.importData()
+}
+
+const onClickExportData = async () => {
+  consoleLog('onClickExportData', '导出数据')
+  emitClickMenu()
+  emitOpenExportDataModal()
+}
+
+const onClickCheckUpdater = async () => {
+  consoleLog('onClickCheckUpdater', '检查更新')
+  emitClickMenu()
+  window.preloadContext.mix.appCheckUpdater()
+}
+
+const emitClickMenu = () => {
+  emits('click')
 }
 </script>
 
@@ -31,7 +57,7 @@ const onClickSwitchDevTools = async () => {
       <a href="javascript:;">关于</a>
     </a-menu-item>
     <a-menu-divider></a-menu-divider>
-    <a-menu-item key="check-update">
+    <a-menu-item key="check-updater" @click="onClickCheckUpdater">
       <template #icon><sync-outlined /></template>
       <a href="javascript:;">检查更新</a>
     </a-menu-item>
@@ -44,11 +70,11 @@ const onClickSwitchDevTools = async () => {
       <a href="javascript:;">主页</a>
     </a-menu-item>
     <a-menu-divider></a-menu-divider>
-    <a-menu-item key="import">
+    <a-menu-item key="import" @click="onClickImportData">
       <template #icon><import-outlined /></template>
       <a href="javascript:;">导入</a>
     </a-menu-item>
-    <a-menu-item key="export">
+    <a-menu-item key="export" @click="onClickExportData">
       <template #icon><export-outlined /></template>
       <a href="javascript:;">导出</a>
     </a-menu-item>

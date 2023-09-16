@@ -1,7 +1,7 @@
 Name: cipher-api
 Host: 0.0.0.0
 Port: 50000
-Mode: pro
+Mode: dev
 Timeout: 10000
 Stat: false
 KeepDays: 15
@@ -19,7 +19,10 @@ Log:
 Auth:
   AccessSecret: abcdefghijklmn
   AccessExpire: 2592000
-Sqlite:
-  DbFilePath: /Users/xulei/jungle/githubproject/my/zz-cipher/packages/desktop/.Cipher/server/db/cipher.db
-  Log:
-    Level: error
+Custom:
+  AesKey: '123456abcdefghijklmnopqrstuvwxyz'
+  SaveEncrypt: false
+  Sqlite:
+    DbFilePath: /Users/xulei/jungle/githubproject/my/zz-cipher/packages/desktop/.Cipher/server/db/cipher.db
+    Log:
+      Level: error

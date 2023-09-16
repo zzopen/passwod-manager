@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"runtime/debug"
+	"zz-cipher/cipher/static"
 	"zz-cipher/common/core/validator"
 
 	"github.com/zeromicro/go-zero/core/conf"
@@ -42,6 +43,8 @@ func main() {
 	defer server.Stop()
 
 	sc := svc.NewServiceContext(c)
+
+	static.MustNewStaticServer(server)
 	handler.RegisterHandlers(server, sc)
 	globalHandler(server)
 	fmt.Printf("Starting server at %s:%d...\n", c.Host, c.Port)

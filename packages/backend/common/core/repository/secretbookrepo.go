@@ -43,10 +43,10 @@ func (repo *SecretBookRepository) GetListBySecretCategoryId(secretCategoryId uin
 	return res, nil
 }
 
-// GetAll 获取全部记录
-func (repo *SecretBookRepository) GetAll() ([]*model.SecretBook, error) {
+// GetAllNormal 获取全部正常记录
+func (repo *SecretBookRepository) GetAllNormal() ([]*model.SecretBook, error) {
 	q := repo.SecretBook
-	res, err := q.WithContext(repo.ctx).Where(q.IsDel.Eq(tool.FlagNormal)).Preload(q.SecretCategory).Find()
+	res, err := q.WithContext(repo.ctx).Where(q.IsDel.Eq(tool.FlagNormal)).Order(q.Id).Preload(q.SecretCategory).Find()
 	if err != nil {
 		return nil, err
 	}
@@ -83,4 +83,14 @@ func (repo *SecretBookRepository) UpdateById(id uint64, m map[string]any) error 
 	}
 
 	return nil
+}
+
+func (repo *SecretBookRepository) BatchGetSecretBookList(startId uint64, limit int) ([]*model.SecretBook, error) {
+	ctx := context.Background()
+	q := query.Q.SecretBook
+	res, err := q.WithContext(ctx).Where(q.Id.Gte(startId), q.IsDel.Eq(tool.FlagNormal)).Order(q.Id).Limit(limit).Find()
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
 }

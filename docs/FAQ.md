@@ -13,15 +13,17 @@
 - [x] 完善本地json存储数据模块
 - [x] 完善后台服务启动，从全局配置中获取baseUrl
 - [x] 完善窗体的开启和关闭逻辑
+- [x] 数据库敏感内容采用AES加密
+- [x] 系统设置
+- [ ] 右键菜单
 - [ ] 完善应用图标，包括开发环境，打包过程
+- [ ] 假设sqlite要更新表结构怎么办呢
 - [ ] 测试开发环境和生产环境打包,以及源代码加密
+- [ ] 本地数据导入导出，采用websocket实现
+
 - [ ] axios重新封装，参考github
 - [ ] electron-store 会报错，卸载了，暂时不会解决，Cannot find module 'ajv/dist/compile/codegen'
 - [ ] mac app签名
 - [ ] 完善统一打包脚本
-- [ ] 右键菜单
-- [ ] 系统设置
 - [ ] 图标一开始是默认的，然后突然变成自定义的
-- [ ] 本地数据导入导出
-- [ ] 数据采用AES加密
 - [ ] electron-store 存储位置 userData  /Users/xulei/Library/Application Support/@zzopen/music-desktop

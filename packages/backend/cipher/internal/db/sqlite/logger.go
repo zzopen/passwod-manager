@@ -19,7 +19,7 @@ func NewDbLogger(conf config.Config) logger.Interface {
 	}
 
 	// db log level
-	var confLogLevel = conf.Sqlite.Log.Level
+	var confLogLevel = conf.Custom.Sqlite.Log.Level
 	var logLevel logger.LogLevel
 	if confLogLevel == "Silent" {
 		logLevel = logger.Silent

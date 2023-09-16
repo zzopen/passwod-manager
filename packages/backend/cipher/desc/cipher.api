@@ -8,6 +8,7 @@ import (
 	"example/example.api"
 	"secret-book/secret-book.api"
 	"secret-category/secret-category.api"
+	"export/export.api"
 )
 
 info(

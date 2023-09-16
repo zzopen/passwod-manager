@@ -23,10 +23,14 @@ export interface ServerConfFile {
     AccessSecret?: string
     AccessExpire?: number
   }
-  Sqlite?: {
-    DbFilePath?: string
-    Log?: {
-      Level?: string
+  Custom?: {
+    AesKey?: string
+    SaveEncrypt?: boolean
+    Sqlite?: {
+      DbFilePath?: string
+      Log?: {
+        Level?: string
+      }
     }
   }
 }
@@ -56,10 +60,14 @@ export const defaultServerConfFile: ServerConfFile = {
     AccessSecret: 'abcdefghijklmn',
     AccessExpire: 2592000
   },
-  Sqlite: {
-    DbFilePath: '',
-    Log: {
-      Level: 'error'
+  Custom: {
+    AesKey: '123456abcdefghijklmnopqrstuvwxyz',
+    SaveEncrypt: true,
+    Sqlite: {
+      DbFilePath: '',
+      Log: {
+        Level: 'error'
+      }
     }
   }
 }

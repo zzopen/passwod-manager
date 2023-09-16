@@ -37,6 +37,10 @@ func (l *UpdateLogic) Update(req *types.SecretCategoryUpdateReq) (resp *response
 		return nil, response.FailWithMsg(response.SearchFailMsg())
 	}
 
+	if secretCategory.IsDefault() {
+		return response.Success(), nil
+	}
+
 	// 检查类别是否要修改
 	var secretCategoryParent *model.SecretCategory
 	var isTopLevel = req.Pid == "0"
@@ -61,8 +65,10 @@ func (l *UpdateLogic) Update(req *types.SecretCategoryUpdateReq) (resp *response
 	m["name"] = req.Name
 	if isTopLevel {
 		m["pid"] = 0
+		m["pid_chain"] = ""
 	} else if secretCategoryParent != nil {
 		m["pid"] = secretCategoryParent.Id
+		m["pid_chain"] = secretCategoryParent.InheritChain()
 	}
 
 	if err = l.svcCtx.SecretCategoryRepository.UpdateById(secretCategory.Id, m); err != nil {

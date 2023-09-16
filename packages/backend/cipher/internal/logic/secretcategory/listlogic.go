@@ -24,6 +24,7 @@ type ListItem struct {
 	CreatedAt     string `json:"created_at"`
 	UpdatedAt     string `json:"updated_at"`
 	DataUpdatedAt string `json:"data_updated_at"`
+	IsDefault     bool   `json:"is_default"`
 }
 
 func NewListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListLogic {
@@ -36,7 +37,7 @@ func NewListLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ListLogic {
 
 func (l *ListLogic) List(req *types.SecretCategoryListReq) (resp *response.ApiResponse, err error) {
 	res := tool.EmptySlice[*ListItem]()
-	secretCategoryList, _ := l.svcCtx.SecretCategoryRepository.GetAll()
+	secretCategoryList, _ := l.svcCtx.SecretCategoryRepository.GetAllNormal()
 	if secretCategoryList == nil {
 		return response.SuccessWithData(res), nil
 	}
@@ -49,6 +50,7 @@ func (l *ListLogic) List(req *types.SecretCategoryListReq) (resp *response.ApiRe
 			CreatedAt:     v.CreatedAt.String(),
 			UpdatedAt:     v.UpdatedAt.String(),
 			DataUpdatedAt: v.DataUpdatedAt.String(),
+			IsDefault:     v.IsDefault(),
 		}
 
 		res = append(res, item)

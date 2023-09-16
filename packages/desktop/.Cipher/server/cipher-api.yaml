@@ -19,7 +19,10 @@ Log:
 Auth:
   AccessSecret: abcdefghijklmn
   AccessExpire: 2592000
-Sqlite:
-  DbFilePath: /Users/xulei/jungle/githubproject/my/zz-cipher/packages/desktop/.Cipher/server/db/cipher.db
-  Log:
-    Level: error
+Custom:
+  AesKey: 123456abcdefghijklmnopqrstuvwxyz
+  SaveEncrypt: true
+  Sqlite:
+    DbFilePath: /Users/xulei/jungle/githubproject/my/zz-cipher/packages/desktop/.Cipher/server/db/cipher.db
+    Log:
+      Level: error

@@ -86,7 +86,6 @@ const singleInstance = () => {
     appQuit()
   } else {
     app.on('second-instance', () => {
-      console.log('second-instance')
       const mainWindow = getMainWindow()
       if (mainWindow) {
         if (mainWindow.isMinimized()) {

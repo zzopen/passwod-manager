@@ -10,11 +10,9 @@ import {
 import type { Event } from '@main/shared/deps'
 import { isDev, logger } from '@main/shared'
 import icon from '@resources/icons/icon.ico?asset'
-
-import type { Nullable } from '@common/types'
 import { defaultConfig } from '@main/config'
 
-let mainWindow: Nullable<BrowserWindow>
+let mainWindow: BrowserWindow | undefined
 
 const MAIN_WINDOW_MIN_WIDTH = 1045
 const MAIN_WINDOW_MIN_HEIGHT = 670
@@ -36,6 +34,7 @@ const createWindow = async (): Promise<BrowserWindow> => {
     webPreferences: {
       preload: nodePath.join(__dirname, '../preload/index.js'),
       sandbox: false,
+      spellcheck: true,
       webSecurity: true,
       contextIsolation: true, // 是否开启隔离上下文
       nodeIntegrationInWorker: false
@@ -82,7 +81,7 @@ function windowListener() {
   mainWindow.on('close', (event: Event) => {
     logger.info('', 'mainWindow close')
     if (defaultConfig.appWillQuit) {
-      mainWindow = null
+      mainWindow = undefined
     } else {
       event.preventDefault()
       mainWindow?.hide()
@@ -91,7 +90,7 @@ function windowListener() {
 
   mainWindow.on('closed', () => {
     logger.info('', 'mainWindow closed')
-    mainWindow = null
+    mainWindow = undefined
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
