@@ -22,7 +22,7 @@ export default defineConfig({
         '@main': resolve('src/main'),
         '@common': resolve('src/common'),
         '@resources': resolve('resources'),
-        '@build': resolve('build'),
+        '@build': resolve('build')
       }
     },
     plugins: [externalizeDepsPlugin()]
